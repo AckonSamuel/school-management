@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('parent_phone_number');
             $table->string('second_phone_number')->nullable();
             $table->boolean('gender');
-            $table->integer('classroom_id')->unsigned();
+            $table->unsignedBigInteger('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->date('enrollment_date');
             $table->timestamps();

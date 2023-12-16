@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('subject_code');
             $table->text('description')->nullable();
             $table->boolean('semester');
-            $table->integer('teacher_id')->unsigned()->nullable();
-            $table->foreign('teacher_id')->references('id')->on('teachers')->nullOnDelete();
-            $table->integer('classroom_id')->unsigned()->nullable();
-            $table->foreign('classroom_id')->references('id')->on('classrooms')->nullOnDelete();
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->unsignedBigInteger('classroom_id');
+            $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->timestamps();
         });
     }

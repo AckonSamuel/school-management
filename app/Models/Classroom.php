@@ -10,7 +10,7 @@ class Classroom extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'class_name',
         'description',
     ];
 
@@ -22,5 +22,4 @@ class Classroom extends Model
         return $this->hasMany(Student::class);
     }
 
-    
 }
