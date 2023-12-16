@@ -24,12 +24,14 @@ class AuthController extends Controller
             'password' => bcrypt($data['password'])
         ]);
 
+        $user->sendEmailVerificationNotification();
+
         $token = $user->createToken('apiToken')->plainTextToken;
         $res = [
             'user' => $user,
             'token' => $token
         ];
-        return response($res, 201);
+        return response("Verification link sent to email", 201);
 
     }
 }
