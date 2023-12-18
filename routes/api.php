@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationApiController;
+use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\EmailVerificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,8 @@ Route::middleware('auth:sanctum')->get('/email/verify/{id}/{hash}', [EmailVerifi
 
 // Route to resend email verification
 Route::middleware('auth:sanctum')->post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/import/excel', [ExcelImportController::class, 'import']);
+    // Add other authenticated routes here
+});
