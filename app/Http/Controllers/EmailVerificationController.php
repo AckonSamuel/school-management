@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmailVerificationController extends Controller
 {
     // Verify the user's email
-    public function verify(Request $request)
+    public function verify(Request $request, $id, $hash)
     {
-        if (! hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
+        $user = User::find($id);
+
+        if (!$user) {
             return response()->json(['message' => 'Invalid verification link'], 400);
         }
 
-        if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
+        if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
             return response()->json(['message' => 'Invalid verification link'], 400);
         }
 
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Email already verified']);
         }
 
-        $request->user()->markEmailAsVerified();
-        event(new Verified($request->user()));
+        $user->markEmailAsVerified();
+        event(new Verified($user));
 
         return response()->json(['message' => 'Email verified']);
     }
@@ -31,11 +36,17 @@ class EmailVerificationController extends Controller
     // Resend email verification link
     public function resend(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        $user = User::where('email', $request->input('email'))->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Email already verified']);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
 
         return response()->json(['message' => 'Verification email sent']);
     }
