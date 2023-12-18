@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\YourImportClass; // Assuming YourImportClass is the class that handles your import logic
+use App\Imports\SchoolImportClass; // Assuming YourImportClass is the class that handles your import logic
 
 class ExcelImportController extends Controller
 {
@@ -20,7 +20,7 @@ class ExcelImportController extends Controller
  
         try {
             // Process the Excel file
-            Excel::import(new YourImportClass, $file);
+            Excel::import(new SchoolImportClass, $file);
             
             // Return a success response
             return response()->json(['message' => 'Excel file imported successfully'], 200);
