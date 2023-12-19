@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationApiController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\TeacherController;
@@ -31,7 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/import/excel', [ExcelImportController::class, 'import']);
     // Add other authenticated routes here
 });
 
@@ -40,3 +40,4 @@ Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 've
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
 Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teachers.pdf');
 Route::get('/teachers/excel', [TeacherController::class, 'exportToExcel']);
+Route::post('/import-excel/{model}', [ImportController::class, 'importData']);
