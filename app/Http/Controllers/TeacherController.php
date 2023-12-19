@@ -102,8 +102,8 @@ public function createPDF() {
 }
 public function exportToExcel()
 {
-    $data = Teacher::all()->toArray();
+    $teachers = Teacher::all()->toArray();
     $export = new ExcelExport();
-    return $export->exportDataToExcel($data);
+    return $export->exportDataToExcel($teachers);
 }   
 }

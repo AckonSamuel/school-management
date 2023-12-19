@@ -39,3 +39,4 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
 Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teachers.pdf');
+Route::get('/teachers/excel', [TeacherController::class, 'exportToExcel']);

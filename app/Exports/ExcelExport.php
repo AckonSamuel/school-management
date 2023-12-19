@@ -4,8 +4,7 @@ namespace App\Exports;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ExcelExport
 {
@@ -15,37 +14,40 @@ class ExcelExport
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
 
-            // Assuming $data is an array of data you want to export
-            // Example: $data = [['Name', 'Email'], ['John Doe', 'john@example.com']];
-            
-            foreach ($data as $row => $rowData) {
-                foreach ($rowData as $column => $value) {
-                    $sheet->setCellValueByColumnAndRow($column + 1, $row + 1, $value);
-                }
+            // Set headers (optional)
+            $headers = array_keys($data[0]); // Assuming the keys of the first array are headers
+            $sheet->fromArray([$headers], null, 'A1');
+
+            // Populate data starting from row 2
+            $rowData = [];
+            foreach ($data as $rowIndex => $row) {
+                $rowData[] = array_values($row);
             }
+            $sheet->fromArray($rowData, null, 'A2');
 
+            // Create a temporary file to store the Excel data
+            $tempFilePath = tempnam(sys_get_temp_dir(), 'exported_data');
             $writer = new Xlsx($spreadsheet);
+            $writer->save($tempFilePath);
 
-            // Store the Excel file in memory
-            ob_start();
-            $writer->save('php://output');
-            $excelContent = ob_get_clean();
+            // Store the Excel file in Laravel's storage
+            $fileName = 'exported_data.xlsx';
+            Storage::disk('local')->put($fileName, file_get_contents($tempFilePath));
 
-            // Return the Excel file as a downloadable response
-            return Response::make(
-                $excelContent,
-                200,
-                [
-                    'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                    'Content-Disposition' => 'attachment; filename="exported_data.xlsx"',
-                ]
-            );
+            // Get the file content from storage
+            $fileContent = Storage::disk('local')->get($fileName);
+
+            // Return a downloadable response
+            return response()->make($fileContent, 200, [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
+            ]);
         } catch (\Exception $e) {
             // Log the error for debugging
             Log::error('Excel export error: ' . $e->getMessage());
 
             // Return a response with an error message
-            return Response::json(['error' => 'Failed to export Excel file.'], 500);
+            return response()->json(['error' => 'Failed to export Excel file.'], 500);
         }
     }
 }
