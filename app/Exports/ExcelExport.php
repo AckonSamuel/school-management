@@ -44,7 +44,7 @@ class ExcelExport
             ]);
         } catch (\Exception $e) {
             // Log the error for debugging
-            Log::error('Excel export error: ' . $e->getMessage());
+            \Log::error('Excel export error: ' . $e->getMessage());
 
             // Return a response with an error message
             return response()->json(['error' => 'Failed to export Excel file.'], 500);
