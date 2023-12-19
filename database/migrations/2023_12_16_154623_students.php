@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('first_name');
+$table->increments('id');            $table->string('first_name');
             $table->string('last_name');
             $table->string('student_num');
             $table->date('birthday');
@@ -21,7 +20,7 @@ return new class extends Migration
             $table->string('parent_phone_number');
             $table->string('second_phone_number')->nullable();
             $table->boolean('gender');
-            $table->uuid('classroom_id');
+            $table->unsignedInteger('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->date('enrollment_date');
             $table->timestamps();

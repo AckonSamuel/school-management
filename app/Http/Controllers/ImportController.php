@@ -3,31 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Imports\ExcelImport;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Ramsey\Uuid\Uuid;
 
 class ImportController extends Controller
 {
     public function importData(Request $request)
     {
-        // Validate the request, ensuring the file is present
+        // Validate the incoming request, ensuring a file and model are provided
         $request->validate([
-            'file' => 'required|mimes:xlsx,xls|max:2048', // Adjust file types and size as needed
-            'model' => 'required|string', // New parameter for the model class name
+            'file' => 'required|mimes:xlsx,xls',
+            'model' => 'required'
         ]);
-
-        $file = $request->file('file');
-        $modelClassName = 'App\Models\\' . $request->input('model'); // Assuming input is the model class name
-
+    
         try {
-            $importer = new ExcelImport();
-            $importer->importData($file->getRealPath(), $modelClassName); // Pass model class name
-
-            return response()->json(['message' => 'Data imported successfully'], 200);
+            $file = $request->file('file');
+            $modelClassName = 'App\Models\\' . $request->input('model');
+    
+            $spreadsheet = IOFactory::load($file);
+            $sheet = $spreadsheet->getActiveSheet();
+    
+            $rows = $sheet->toArray();
+            $headers = array_shift($rows);
+    
+            foreach ($rows as $row) {
+                $data = array_combine($headers, $row);
+    
+                // Remove 'id' field from the data array
+                unset($data['id']);
+    
+                $modelClassName::create($data);
+            }
+    
+            return response()->json(['message' => 'Data imported successfully now'], 200);
         } catch (\Exception $e) {
-            // Log the error for debugging
-            \Log::error('API data import error: ' . $e->getMessage());
-
-            return response()->json(['error' => 'Failed to import data.'], 500);
+            \Log::error('Excel import error: ' . $e->getMessage());
+    
+            return response()->json(['error' => 'Failed to import Excel data'], 500);
         }
+    }
+    
+
+    private function generateNewId()
+    {
+        return Uuid::uuid4()->toString();
     }
 }
