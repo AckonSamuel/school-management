@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VerificationApiController;
 use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,3 +38,4 @@ Route::middleware('auth:sanctum')->group(function () {
 // Email verification routes (not requiring authentication)
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
+Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teachers.pdf');

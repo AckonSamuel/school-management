@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
@@ -63,4 +64,41 @@ class TeacherController extends Controller
     {
         //
     }
+    
+public function createPDF() {
+    try {
+        $teachers = Teacher::all()->toArray();
+
+        $pdf = PDF::loadView('teacherspdf', compact('teachers'))
+                  ->setPaper('a4') // Set the paper size to A4
+                  ->setOptions([
+                      'dpi' => 150, 
+                      'defaultFont' => 'sans-serif', // Set default font
+                      'isHtml5ParserEnabled' => true, // Enable HTML5 parsing
+                      'isRemoteEnabled' => true, // Enable remote file access
+                      'font_size' => 12, // Set font size (example: 12)
+                  ]);
+
+        $pdfContent = $pdf->output();
+
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="teachers_pdf_file.pdf"',
+            'Content-Length' => strlen($pdfContent),
+        ];
+
+        return response()->streamDownload(function () use ($pdfContent) {
+            echo $pdfContent;
+        }, 'teachers_pdf_file.pdf', $headers);
+    } catch (\Exception $e) {
+        // Log the error for debugging
+        \Log::error('PDF generation error: ' . $e->getMessage());
+        
+        // Handle the error (e.g., return a response with an error message)
+        return response()->json(['error' => 'PDF generation failed. Please try again later.'], 500);
+    }
+}
+
+    
+    
 }

@@ -1,0 +1,403 @@
+{
+    "message": "foreach() argument must be of type array|object, string given",
+    "exception": "Spatie\\LaravelIgnition\\Exceptions\\ViewException",
+    "file": "/home/samuel/Desktop/school-management/resources/views/teacherspdf.blade.php",
+    "line": 28,
+    "trace": [
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php",
+            "line": 254,
+            "function": "handleError",
+            "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/resources/views/teacherspdf.blade.php",
+            "line": 28,
+            "function": "Illuminate\\Foundation\\Bootstrap\\{closure}",
+            "class": "Illuminate\\Foundation\\Bootstrap\\HandleExceptions",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php",
+            "line": 124,
+            "function": "require"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php",
+            "line": 125,
+            "function": "Illuminate\\Filesystem\\{closure}",
+            "class": "Illuminate\\Filesystem\\Filesystem",
+            "type": "::"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php",
+            "line": 58,
+            "function": "getRequire",
+            "class": "Illuminate\\Filesystem\\Filesystem",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php",
+            "line": 72,
+            "function": "evaluatePath",
+            "class": "Illuminate\\View\\Engines\\PhpEngine",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/View/View.php",
+            "line": 207,
+            "function": "get",
+            "class": "Illuminate\\View\\Engines\\CompilerEngine",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/View/View.php",
+            "line": 190,
+            "function": "getContents",
+            "class": "Illuminate\\View\\View",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/View/View.php",
+            "line": 159,
+            "function": "renderContents",
+            "class": "Illuminate\\View\\View",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/barryvdh/laravel-dompdf/src/PDF.php",
+            "line": 125,
+            "function": "render",
+            "class": "Illuminate\\View\\View",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php",
+            "line": 56,
+            "function": "loadView",
+            "class": "Barryvdh\\DomPDF\\PDF",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/app/Http/Controllers/TeacherController.php",
+            "line": 71,
+            "function": "__callStatic",
+            "class": "Barryvdh\\DomPDF\\Facade\\Pdf",
+            "type": "::"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Controller.php",
+            "line": 54,
+            "function": "createPDF",
+            "class": "App\\Http\\Controllers\\TeacherController",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php",
+            "line": 43,
+            "function": "callAction",
+            "class": "Illuminate\\Routing\\Controller",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
+            "line": 259,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\ControllerDispatcher",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Route.php",
+            "line": 205,
+            "function": "runController",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 806,
+            "function": "run",
+            "class": "Illuminate\\Routing\\Route",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 141,
+            "function": "Illuminate\\Routing\\{closure}",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php",
+            "line": 50,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+            "line": 159,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+            "line": 125,
+            "function": "handleRequest",
+            "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php",
+            "line": 87,
+            "function": "handleRequestUsingNamedLimiter",
+            "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php",
+            "line": 25,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 141,
+            "function": "Laravel\\Sanctum\\Http\\Middleware\\{closure}",
+            "class": "Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 116,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php",
+            "line": 24,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 116,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 805,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 784,
+            "function": "runRouteWithinStack",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 748,
+            "function": "runRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Routing/Router.php",
+            "line": 737,
+            "function": "dispatchToRoute",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+            "line": 200,
+            "function": "dispatch",
+            "class": "Illuminate\\Routing\\Router",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 141,
+            "function": "Illuminate\\Foundation\\Http\\{closure}",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/app/Http/Middleware/ForceJson.php",
+            "line": 13,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "App\\Http\\Middleware\\ForceJson",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php",
+            "line": 31,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php",
+            "line": 21,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php",
+            "line": 40,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\TrimStrings",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ValidatePostSize.php",
+            "line": 27,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php",
+            "line": 99,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php",
+            "line": 62,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Http\\Middleware\\HandleCors",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php",
+            "line": 39,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 180,
+            "function": "handle",
+            "class": "Illuminate\\Http\\Middleware\\TrustProxies",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php",
+            "line": 116,
+            "function": "Illuminate\\Pipeline\\{closure}",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+            "line": 175,
+            "function": "then",
+            "class": "Illuminate\\Pipeline\\Pipeline",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php",
+            "line": 144,
+            "function": "sendRequestThroughRouter",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/public/index.php",
+            "line": 51,
+            "function": "handle",
+            "class": "Illuminate\\Foundation\\Http\\Kernel",
+            "type": "->"
+        },
+        {
+            "file": "/home/samuel/Desktop/school-management/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php",
+            "line": 16,
+            "function": "require_once"
+        }
+    ]
+}
