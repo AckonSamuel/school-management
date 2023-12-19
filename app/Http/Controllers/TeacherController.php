@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\Exports\ExcelExport;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
@@ -97,8 +98,12 @@ public function createPDF() {
         // Handle the error (e.g., return a response with an error message)
         return response()->json(['error' => 'PDF generation failed. Please try again later.'], 500);
     }
-}
 
-    
-    
+}
+public function exportToExcel()
+{
+    $data = Teacher::all()->toArray();
+    $export = new ExcelExport();
+    return $export->exportDataToExcel($data);
+}   
 }
