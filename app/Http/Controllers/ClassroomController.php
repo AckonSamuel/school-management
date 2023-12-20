@@ -45,7 +45,7 @@ class ClassroomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClassroomRequest $request, Classroom $classroom)
+    public function update(ClassroomAddUpdateRequest $request, Classroom $classroom)
     {
         try {
             $classroom->update($request->validated());
