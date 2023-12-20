@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreClassroomRequest;
-use App\Http\Requests\UpdateClassroomRequest;
+use App\Http\Requests\ClassroomAddUpdateRequest;
 use App\Models\Classroom;
+use Illuminate\Database\QueryException;
 
 class ClassroomController extends Controller
 {
@@ -13,23 +13,25 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $classrooms = Classroom::all();
+            return $classrooms->toArray();
+        } catch (QueryException $exception) {
+            return response()->json(['error' => 'Failed to retrieve classrooms.'], 500);
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreClassroomRequest $request)
+    public function store(ClassroomAddUpdateRequest $request)
     {
-        //
+        try {
+            $classroom = Classroom::create($request->validated());
+            return $classroom->toArray();
+        } catch (QueryException $exception) {
+            return response()->json(['error' => 'Failed to store classroom.'], 500);
+        }
     }
 
     /**
@@ -37,15 +39,7 @@ class ClassroomController extends Controller
      */
     public function show(Classroom $classroom)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Classroom $classroom)
-    {
-        //
+        return $classroom->toArray();
     }
 
     /**
@@ -53,7 +47,12 @@ class ClassroomController extends Controller
      */
     public function update(UpdateClassroomRequest $request, Classroom $classroom)
     {
-        //
+        try {
+            $classroom->update($request->validated());
+            return $classroom->toArray();
+        } catch (QueryException $exception) {
+            return response()->json(['error' => 'Failed to update classroom.'], 500);
+        }
     }
 
     /**
@@ -61,6 +60,11 @@ class ClassroomController extends Controller
      */
     public function destroy(Classroom $classroom)
     {
-        //
+        try {
+            $classroom->delete();
+            return ['message' => 'Classroom deleted successfully'];
+        } catch (QueryException $exception) {
+            return response()->json(['error' => 'Failed to delete classroom.'], 500);
+        }
     }
 }
