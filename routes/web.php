@@ -63,6 +63,10 @@ Route::get('sign_up', function () {
     return view('auth.sign_up');
 });
 
+Route::get('/', function () {
+    return view('dashboard');
+});
+
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');

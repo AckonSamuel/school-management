@@ -46,7 +46,7 @@ class AuthController extends Controller
         $token = $user->createToken('apiToken')->plainTextToken;
     
         // If login succeeds, return a view with the token
-        return view('dashboard')->with('token', $token);
+        return redirect('/')->with('token', $token);
     }
 
     public function logout(Request $request)
