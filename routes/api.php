@@ -41,3 +41,10 @@ Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->na
 Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teachers.pdf');
 Route::get('/teachers/excel', [TeacherController::class, 'exportToExcel']);
 Route::post('/import-excel/{model}', [ImportController::class, 'importData']);
+Route::prefix('teachers')->group(function () {
+    Route::get('/', [TeacherController::class, 'index']);
+    Route::post('/', [TeacherController::class, 'store']);
+    Route::get('/{teacher}', [TeacherController::class, 'show']);
+    Route::put('/{teacher}', [TeacherController::class, 'update']);
+    Route::delete('/{teacher}', [TeacherController::class, 'destroy']);
+});
