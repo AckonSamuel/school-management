@@ -23,8 +23,8 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             'first_name' => 'required|max:30',
-            'surname' => 'required|max:30',
-            'birth_date' => 'required',
+            'last_name' => 'required|max:30',
+            'birthday' => 'required',
             'classroom' => 'required|exists:classrooms,id',
             'parent_phone_number' => 'required|regex:/(0)[0-9]{10}/',
             'second_phone_number' => 'nullable|regex:/(0)[0-9]{10}/',

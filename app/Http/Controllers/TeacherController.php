@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use PDF;
 use App\Exports\ExcelExport;
@@ -17,12 +17,13 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        try {
-            $teachers = Teacher::with('subjects')->paginate(10);
-            return response()->json($teachers);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong'], 500);
-        }
+            $teachers = Teacher::all();
+            return view('teachers.index', compact('teachers'));
+    }
+
+    public function create()
+    {
+        return view('teachers.create');
     }
 
     public function store(StoreTeacherRequest $request)
@@ -30,19 +31,16 @@ class TeacherController extends Controller
         try {
             $validated = $request->validated();
             $teacher = Teacher::create($validated);
-            return response()->json($teacher, 201);
+            return redirect()->route('teachers.show', $teacher->id)->with('success', 'Teacher created successfully');
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong'], 500);
+            \Log::error('Teacher creation error: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to create teacher. Please try again.');
         }
     }
 
     public function show(Teacher $teacher)
     {
-        try {
-            return response()->json($teacher);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Teacher not found'], 404);
-        }
+        return view('teachers.show', compact('teacher'));
     }
 
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
@@ -50,9 +48,10 @@ class TeacherController extends Controller
         try {
             $validated = $request->validated();
             $teacher->update($validated);
-            return response()->json($teacher);
+            return redirect()->route('teachers.show', $teacher->id)->with('success', 'Teacher updated successfully');
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong'], 500);
+            \Log::error('Teacher update error: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to update teacher. Please try again.');
         }
     }
 
@@ -60,51 +59,42 @@ class TeacherController extends Controller
     {
         try {
             $teacher->delete();
-            return response()->json(['message' => 'Teacher deleted successfully']);
+            return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfully');
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Something went wrong'], 500);
+            \Log::error('Teacher deletion error: ' . $e->getMessage());
+            return back()->with('error', 'Failed to delete teacher. Please try again.');
         }
     }
-
     public function createPDF()
     {
         try {
-            $teachers = Teacher::all()->toArray();
+            $teachers = Teacher::all();
 
             $pdf = PDF::loadView('teacherspdf', compact('teachers'))
-                ->setPaper('a4') // Set the paper size to A4
+                ->setPaper('a4')
                 ->setOptions([
                     'dpi' => 150,
-                    'defaultFont' => 'sans-serif', // Set default font
-                    'isHtml5ParserEnabled' => true, // Enable HTML5 parsing
-                    'isRemoteEnabled' => true, // Enable remote file access
-                    'font_size' => 12, // Set font size (example: 12)
+                    'defaultFont' => 'sans-serif',
+                    'isHtml5ParserEnabled' => true,
+                    'isRemoteEnabled' => true,
+                    'font_size' => 12,
                 ]);
 
-            $pdfContent = $pdf->output();
-
-            $headers = [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="teachers_pdf_file.pdf"',
-                'Content-Length' => strlen($pdfContent),
-            ];
-
-            return response()->streamDownload(function () use ($pdfContent) {
-                echo $pdfContent;
-            }, 'teachers_pdf_file.pdf', $headers);
+            return $pdf->download('teachers_pdf_file.pdf');
         } catch (\Exception $e) {
-            // Log the error for debugging
             \Log::error('PDF generation error: ' . $e->getMessage());
-
-            // Handle the error (e.g., return a response with an error message)
-            return response()->json(['error' => 'PDF generation failed. Please try again later.'], 500);
+            return back()->with('error', 'PDF generation failed. Please try again later.');
         }
-
     }
     public function exportToExcel()
     {
         $teachers = Teacher::all()->toArray();
         $export = new ExcelExport();
         return $export->exportDataToExcel($teachers);
+    }
+
+    public function edit(Teacher $teacher)
+    {
+        return view('teachers.edit', compact('teacher'));
     }
 }

@@ -21,8 +21,8 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             'first_name' => 'required|max:30',
-            'surname' => 'required|max:30',
-            'birth_date' => 'required',
+            'last_name' => 'required|max:30',
+            'birthday' => 'required',
             'classroom_id' => 'required|exists:classrooms,id',
             'parent_phone_number' => 'required',
             'second_phone_number' => 'nullable',

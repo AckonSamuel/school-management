@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Teacher;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -20,18 +21,18 @@ class UpdateTeacherRequest extends FormRequest
      */
     public function rules(): array
     {
+        $teacherId = $this->route('id'); // Change 'teacher' to the parameter name in your route
+    
         return [
             'first_name' => 'required|max:30',
-            'surname' => 'required|max:30',
-            'birth_date' => 'required',
-            'email' => [
-                'required',
-                Rule::unique('teachers', 'email')->ignore($this->route('id'))
-            ],
-
-            'phone_number' => 'required|regex:/(0)[0-9]{10}/',
+            'last_name' => 'required|max:30',
+            'birthday' => 'required',
+            'email' => ['required'],
+            'phone_number' => 'required|regex:/(0)[0-9]{9}/',
             'photo' => 'required|mimes:jpeg,bmp,png,jpg|max:2048',
             'address' => 'required',
         ];
     }
+    
+    
 }
