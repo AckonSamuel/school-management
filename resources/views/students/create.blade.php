@@ -1,58 +1,115 @@
-@extends('layouts.app')
+@extends('home.app')
 
 @section('content')
-    <h1>Create Student</h1>
+    <div class="max-w-3xl mx-auto bg-white shadow-md rounded px-8 py-6 mb-4">
+        <h1 class="text-2xl font-bold mb-4">Create Student</h1>
 
-    <form action="{{ route('students.store') }}" method="POST">
-        @csrf
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+                <strong class="font-bold">Oops! There were some errors:</strong>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
+        <form action="{{ route('students.store') }}" method="POST">
+            @csrf
 
-        <div>
-            <label for="first_name">First Name:</label>
-            <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" maxlength="30"><br>
-        </div>
+            <table class="w-full">
+                <tr>
+                    <td class="py-2">
+                        <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">First Name:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" maxlength="30"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2">Last Name:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" maxlength="30"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="student_num" class="block text-gray-700 text-sm font-bold mb-2">Student Number:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="text" id="student_num" name="student_num" value="{{ old('student_num') }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="birthday" class="block text-gray-700 text-sm font-bold mb-2">Birth Date:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="date" id="birthday" name="birthday" value="{{ old('birthday') }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="enrollment_date" class="block text-gray-700 text-sm font-bold mb-2">Enrollment Date:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="date" id="enrollment_date" name="enrollment_date" value="{{ old('enrollment_date') }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Address:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="text" id="address" name="address" value="{{ old('address') }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="classroom_id" class="block text-gray-700 text-sm font-bold mb-2">Class Name:</label>
+                    </td>
+                    <td class="py-2">
+                        <select id="classroom_id" name="classroom_id"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            @foreach($classrooms as $classroom)
+                                <option value="{{ $classroom->id }}">{{ $classroom->class_name }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="parent_phone_number" class="block text-gray-700 text-sm font-bold mb-2">Parent Phone Number:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="text" id="parent_phone_number" name="parent_phone_number" value="{{ old('parent_phone_number') }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-2">
+                        <label for="gender" class="block text-gray-700 text-sm font-bold mb-2">Gender:</label>
+                    </td>
+                    <td class="py-2">
+                        <input type="text" id="gender" name="gender" value="{{ old('gender') }}"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </td>
+                </tr>
+            </table>
 
-        <div>
-            <label for="last_name">Last name:</label>
-            <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" maxlength="30"><br>
-        </div>
-
-        <div>
-            <label for="student_num">Student Number:</label>
-            <input type="text" id="student_num" name="student_num" value="{{ old('student_num') }}"><br>
-        </div>
-
-        <div>
-            <label for="birthday">Birth Date:</label>
-            <input type="date" id="birthday" name="birthday" value="{{ old('birthday') }}"><br>
-        </div>
-
-        <div>
-            <label for="enrollment_date">Enrollment date:</label>
-            <input type="date" id="enrollment_date" name="enrollment_date" value="{{ old('enrollment_date') }}"><br>
-        </div>
-        <div>
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" value="{{ old('Address') }}"><br>
-        </div>
-        <div>
-            <label for="classroom_id">Class Name:</label>
-            <select id="classroom_id" name="classroom_id">
-                @foreach($classrooms as $classroom)
-                    <option value="{{ $classroom->id }}">{{ $classroom->class_name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div>
-            <label for="parent_phone_number">Parent Phone Number:</label>
-            <input type="text" id="parent_phone_number" name="parent_phone_number" value="{{ old('parent_phone_number') }}"><br>
-        </div>
-
-        <div>
-            <label for="gender">Gender:</label>
-            <input type="text" id="gender" name="gender" value="{{ old('gender') }}"><br>
-        </div>
-
-        <button type="submit">Create Student</button>
-    </form>
+            <div class="mt-6">
+                <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Student</button>
+            </div>
+        </form>
+    </div>
 @endsection

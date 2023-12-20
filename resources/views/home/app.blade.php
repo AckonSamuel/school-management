@@ -12,7 +12,7 @@
     @include('home.partials.navigation')
 
     <!-- Page Content -->
-    <div class="container mx-auto flex">
+    <div class="container mx-0 flex">
 
         <!-- Side Navigation -->
         @include('home.partials.sidebar')

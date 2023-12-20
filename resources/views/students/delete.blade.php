@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('home.app')
 
 @section('content')
     <h1>Delete student</h1>

@@ -23,9 +23,12 @@ class StudentController extends Controller
         return view('students.create', compact('classrooms'));
     }
 
-    public function edit(Student $student)
+    public function edit($id)
     {
-        return view('students.edit', compact('student'));
+        $student = Student::findOrFail($id);
+        $classrooms = Classroom::all();
+    
+        return view('students.edit', compact('student', 'classrooms'));
     }
 
     public function store(StoreStudentRequest $request)
@@ -35,8 +38,8 @@ class StudentController extends Controller
             $student = Student::create($validated);
             return redirect()->route('students.show', $student->id)->with('success', 'Student created successfully');
         } catch (\Exception $e) {
-            \Log::error('Student creation error: ' . $e->getMessage());
-            return back()->withInput()->with('error', 'Failed to create student. Please try again.');
+            $errors = collect([$e->getMessage()]); // Collect error message in a collection
+            return back()->withInput()->withErrors($errors);
         }
     }
 

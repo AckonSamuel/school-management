@@ -1,29 +1,73 @@
-@extends('layouts.app')
+@extends('home.app')
 
 @section('content')
-    <h1>Student Details</h1>
+    <div class="py-6">
+        <h1 class="text-2xl font-bold mb-4">Student Details</h1>
 
-    <p><strong>First Name:</strong> {{ $student->first_name }}</p>
-    <p><strong>Last Name:</strong> {{ $student->last_name }}</p>
-    <p><strong>Student Number: </strong> {{ $student->student_num}} </p>
-    @if ($student->classroom)
-        <p><strong>Class Name:</strong> {{ $student->classroom->class_name }}</p>
-    @endif
-    <p><strong>Parent Contact: </strong> {{ $student->parent_phone_number}} </p>
-    <p><strong>Birthday:</strong> {{ $student->birthday }}</p>
-    <p><strong>Gender:</strong>{{ $student->gender}}</p>
-    <p><strong>Address:</strong> {{ $student->address }}</p>
-    
-    @if ($student->photo)
-        <p><strong>Photo:</strong></p>
-        <img src="{{ $student->photo }}" alt="student's Photo" style="max-width: 300px;">
-    @endif
+        <div class="mt-2 mb-4 flex justify-between">
+            <a href="{{ route('students.index', $student->id) }}" class="flex items-center text-black ml-4 hover:underline">
+                    <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Return
+                </a>
+            </div>
 
-    <a href="{{ route('students.edit', $student->id) }}">Edit</a>
+        <div class="bg-white rounded-lg shadow overflow-hidden max-w-md mx-auto p-6">
+            <table class="w-full">
+                <tbody>
+                    <tr>
+                        <td class="font-semibold">First Name:</td>
+                        <td>{{ $student->first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">Last Name:</td>
+                        <td>{{ $student->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">Student Number:</td>
+                        <td>{{ $student->student_num }}</td>
+                    </tr>
+                    @if ($student->classroom)
+                        <tr>
+                            <td class="font-semibold">Class Name:</td>
+                            <td>{{ $student->classroom->class_name }}</td>
+                        </tr>
+                    @endif
+                    <tr>
+                        <td class="font-semibold">Parent Contact:</td>
+                        <td>{{ $student->parent_phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">Birthday:</td>
+                        <td>{{ $student->birthday }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">Gender:</td>
+                        <td>{{ $student->gender }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-semibold">Address:</td>
+                        <td>{{ $student->address }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            @if ($student->photo)
+                <div class="mt-4">
+                    <p class="font-semibold">Photo:</p>
+                    <img src="{{ $student->photo }}" alt="Student's Photo" class="mt-2 rounded-lg" style="max-width: 300px;">
+                </div>
+            @endif
 
-    <form action="{{ route('students.destroy', $student->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
-    </form>
+            <div class="mt-6 flex justify-end">
+                <a href="{{ route('students.edit', $student->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mr-2">Edit</a>
+                <form action="{{ route('students.destroy', $student->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Are you sure?')" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
