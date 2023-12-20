@@ -25,9 +25,8 @@ class AuthController extends Controller
 
         $user->sendEmailVerificationNotification();
 
-        $token = $user->createToken('apiToken')->plainTextToken;
-
-        return response("Verification link sent to email", 201);
+        // Assuming you want to redirect back with a message
+        return redirect()->back()->with('success', 'Verification link sent to email');
     }
 
     public function login(Request $request)
@@ -36,24 +35,25 @@ class AuthController extends Controller
             'email' => 'required|string',
             'password' => 'required|string',
         ]);
-
+    
         $user = User::where('email', $request->email)->first();
-
+    
         if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+            // If login fails, return the login view with an error message
+            return view('auth.login')->with('error', 'The provided credentials are incorrect.');
         }
-
+    
         $token = $user->createToken('apiToken')->plainTextToken;
-
-        return response()->json(['token' => $token], 200);
+    
+        // If login succeeds, return a view with the token
+        return view('dashboard')->with('token', $token);
     }
 
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        // Assuming you want to redirect back with a success message
+        return redirect()->back()->with('success', 'Logged out successfully');
     }
 }

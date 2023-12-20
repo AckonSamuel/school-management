@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
@@ -48,3 +50,22 @@ Route::prefix('classrooms')->group(function () {
     Route::put('/{classroom}', [ClassroomController::class, 'update'])->name('classrooms.update');
     Route::delete('/{classroom}', [ClassroomController::class, 'destroy'])->name('classrooms.destroy');
 });
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('logout', function () {
+    return view('auth.logout');
+});
+
+Route::get('sign_up', function () {
+    return view('auth.sign_up');
+});
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
+
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
+Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
