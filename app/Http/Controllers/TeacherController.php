@@ -71,7 +71,7 @@ class TeacherController extends Controller
         try {
             $teachers = Teacher::all()->toArray();
 
-            $pdf = \PDF::loadView('teacherspdf', compact('teachers'))
+            $pdf = PDF::loadView('teacherspdf', compact('teachers'))
                 ->setPaper('a4') // Set the paper size to A4
                 ->setOptions([
                     'dpi' => 150,
