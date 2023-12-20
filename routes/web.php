@@ -73,3 +73,9 @@ Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
 
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
+
+// PDF route
+Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teachers.pdf');
+
+// Excel route
+Route::get('/teachers/excel', [TeacherController::class, 'exportToExcel'])->name('teachers.excel');
