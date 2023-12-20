@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use PDF;
 use App\Exports\ExcelExport;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
@@ -15,55 +17,53 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $teachers = Teacher::with('subjects')->paginate(10);
+            return response()->json($teachers);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreTeacherRequest $request)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $teacher = Teacher::create($validated);
+            return response()->json($teacher, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Teacher $teacher)
     {
-        //
+        try {
+            return response()->json($teacher);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Teacher not found'], 404);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Teacher $teacher)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $teacher->update($validated);
+            return response()->json($teacher);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Teacher $teacher)
     {
-        //
+        try {
+            $teacher->delete();
+            return response()->json(['message' => 'Teacher deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
     public function createPDF()

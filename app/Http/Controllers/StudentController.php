@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -13,15 +16,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        try {
+            $students = Student::all();
+            return response()->json($students);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
     /**
@@ -29,7 +29,13 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $student = Student::create($validated);
+            return response()->json($student, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
     /**
@@ -37,15 +43,13 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Student $student)
-    {
-        //
+        try {
+            return response()->json($student);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Student not found'], 404);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
     /**
@@ -53,7 +57,13 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $student->update($validated);
+            return response()->json($student);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 
     /**
@@ -61,6 +71,11 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        try {
+            $student->delete();
+            return response()->json(['message' => 'Student deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong'], 500);
+        }
     }
 }

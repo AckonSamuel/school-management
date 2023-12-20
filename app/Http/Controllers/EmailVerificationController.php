@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,7 @@ class EmailVerificationController extends Controller
         $user->markEmailAsVerified();
         event(new Verified($user));
 
-        return response()->json(['message' => 'Email verified']);
+        return Redirect::to('/verified');
     }
 
     // Resend email verification link

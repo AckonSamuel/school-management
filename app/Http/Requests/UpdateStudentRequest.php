@@ -11,18 +11,24 @@ class UpdateStudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; // Adjust authorization logic if needed
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'first_name' => 'required|max:30',
+            'surname' => 'required|max:30',
+            'birth_date' => 'required',
+            'classroom_id' => 'required|exists:classrooms,id',
+            'parent_phone_number' => 'required',
+            'second_phone_number' => 'nullable',
+            'enrollment_date' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
         ];
     }
 }
