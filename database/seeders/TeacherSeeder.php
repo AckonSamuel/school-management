@@ -17,7 +17,6 @@ class TeacherSeeder extends Seeder
         $faker = Faker::create();
     	foreach (range(1,10) as $index) {
             DB::table('teachers')->insert([
-                'id'=> $faker->uuid,
                 'first_name' => $faker->name,
                 'last_name' => $faker->name,
                 'email' => $faker->email,
@@ -25,8 +24,9 @@ class TeacherSeeder extends Seeder
                 'phone_number' => $faker->phoneNumber,
                'address' => $faker->address,
                'birthday' => $faker->date(),
-               'gender' => $faker->randomElement(['male','female'])
-
+               'gender' => $faker->randomElement(['male','female']),
+               'created_at' => now(),
+               'updated_at' => now(),
             ]);
         }
     }

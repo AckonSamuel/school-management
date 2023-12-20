@@ -19,7 +19,7 @@ $table->increments('id');            $table->string('first_name');
             $table->string('address')->nullable();
             $table->string('parent_phone_number');
             $table->string('second_phone_number')->nullable();
-            $table->boolean('gender');
+            $table->string('gender');
             $table->unsignedInteger('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->date('enrollment_date');

@@ -8,63 +8,54 @@ use Illuminate\Database\QueryException;
 
 class ClassroomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        try {
             $classrooms = Classroom::all();
-            return $classrooms->toArray();
-        } catch (QueryException $exception) {
-            return response()->json(['error' => 'Failed to retrieve classrooms.'], 500);
-        }
+            return view('classrooms.index', compact('classrooms'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function create()
+    {
+        return view('classrooms.create');
+    }
+
     public function store(ClassroomAddUpdateRequest $request)
     {
         try {
             $classroom = Classroom::create($request->validated());
-            return $classroom->toArray();
+            return redirect()->route('classrooms.show', $classroom->id)->with('success', 'Classroom created successfully');
         } catch (QueryException $exception) {
-            return response()->json(['error' => 'Failed to store classroom.'], 500);
+            return back()->withInput()->with('error', 'Failed to store classroom.');
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Classroom $classroom)
     {
-        return $classroom->toArray();
+        return view('classrooms.show', compact('classroom'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function edit(Classroom $classroom)
+    {
+        return view('classrooms.edit', compact('classroom'));
+    }
+
     public function update(ClassroomAddUpdateRequest $request, Classroom $classroom)
     {
         try {
             $classroom->update($request->validated());
-            return $classroom->toArray();
+            return redirect()->route('classrooms.show', $classroom->id)->with('success', 'Classroom updated successfully');
         } catch (QueryException $exception) {
-            return response()->json(['error' => 'Failed to update classroom.'], 500);
+            return back()->withInput()->with('error', 'Failed to update classroom.');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Classroom $classroom)
     {
         try {
             $classroom->delete();
-            return ['message' => 'Classroom deleted successfully'];
+            return redirect()->route('classrooms.index')->with('success', 'Classroom deleted successfully');
         } catch (QueryException $exception) {
-            return response()->json(['error' => 'Failed to delete classroom.'], 500);
+            return back()->with('error', 'Failed to delete classroom.');
         }
     }
 }

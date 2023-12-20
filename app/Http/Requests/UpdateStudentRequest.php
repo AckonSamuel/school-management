@@ -20,15 +20,15 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|max:30',
-            'last_name' => 'required|max:30',
-            'birthday' => 'required',
-            'classroom_id' => 'required|exists:classrooms,id',
-            'parent_phone_number' => 'required',
+            'first_name' => 'nullable|max:30',
+            'last_name' => 'nullable|max:30',
+            'birthday' => 'nullable',
+            'classroom_id' => 'nullable|exists:classrooms,id',
+            'parent_phone_number' => 'nullable',
             'second_phone_number' => 'nullable',
-            'enrollment_date' => 'required',
-            'address' => 'required',
-            'gender' => 'required',
+            'enrollment_date' => 'nullable',
+            'address' => 'nullable',
+            'gender' => 'nullable',
         ];
     }
 }
