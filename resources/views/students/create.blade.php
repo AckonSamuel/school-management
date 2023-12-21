@@ -38,14 +38,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="py-2">
-                        <label for="student_num" class="block text-gray-700 text-sm font-bold mb-2">Student Number:</label>
-                    </td>
-                    <td class="py-2">
-                        <input type="text" id="student_num" name="student_num" value="{{ old('student_num') }}"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    </td>
-                </tr>
+    <td class="py-2">
+        <label for="student_num" class="block text-gray-700 text-sm font-bold mb-2">Student Number:</label>
+    </td>
+    <td class="py-2">
+        <input type="text" id="student_num" name="student_num" value="{{ old('student_num') }}"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+        @error('student_num')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+        @enderror
+    </td>
+</tr>
+
                 <tr>
                     <td class="py-2">
                         <label for="birthday" class="block text-gray-700 text-sm font-bold mb-2">Birth Date:</label>
@@ -100,9 +105,10 @@
                         <label for="gender" class="block text-gray-700 text-sm font-bold mb-2">Gender:</label>
                     </td>
                     <td class="py-2">
-                        <input type="text" id="gender" name="gender" value="{{ old('gender') }}"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    </td>
+                    <select id="gender" name="gender" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <option value="male" @if(old('gender') == 'male') selected @endif>Male</option>
+        <option value="female" @if(old('gender') == 'female') selected @endif>Female</option>
+    </select></td>
                 </tr>
             </table>
 

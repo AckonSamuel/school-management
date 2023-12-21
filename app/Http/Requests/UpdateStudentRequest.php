@@ -23,12 +23,19 @@ class UpdateStudentRequest extends FormRequest
             'first_name' => 'nullable|max:30',
             'last_name' => 'nullable|max:30',
             'birthday' => 'nullable',
+            'student_num' => 'nullable|digits:7',
             'classroom_id' => 'nullable|exists:classrooms,id',
-            'parent_phone_number' => 'nullable',
-            'second_phone_number' => 'nullable',
+            'parent_phone_number' => 'nullable|regex:/(0)[0-9]{9}/',
             'enrollment_date' => 'nullable',
             'address' => 'nullable',
             'gender' => 'nullable',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'parent_phone_number.regex' => 'The phone number must be in the format 0244974077'
         ];
     }
 }
