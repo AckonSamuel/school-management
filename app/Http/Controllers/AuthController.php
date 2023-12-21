@@ -19,11 +19,6 @@ class AuthController extends Controller
             ]);
     
             // Check if the email already exists
-            $existingUser = User::where('email', $data['email'])->first();
-            if ($existingUser) {
-                return redirect()->back()->withErrors(['error' => 'Email already exists.']);
-            }
-    
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -32,9 +27,11 @@ class AuthController extends Controller
     
             $user->sendEmailVerificationNotification();
     
-            return redirect()->back()->withErrors(['success' => 'Verification link sent to email']);
+            return redirect()->back()->with('success', 'Verification link sent to email');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors());
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Failed to sign up. Please try again.']);
+            return redirect()->back()->withErrors($e->getMessage());
         }
     }
     

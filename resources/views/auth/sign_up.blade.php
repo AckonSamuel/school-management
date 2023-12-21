@@ -10,19 +10,7 @@
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-80">
         <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
 
-        @if ($errors->has('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                {{ $errors->first('error') }}
-            </div>
-        @endif
-
-        @if ($errors->has('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                {{ $errors->first('success') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('sign_up') }}">
+        <form id="signup-form" method="POST" action="{{ route('sign_up') }}">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
@@ -45,6 +33,7 @@
             <div class="mb-6">
                 <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password:</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <p id="password-mismatch" class="text-red-500 text-xs italic hidden">Passwords do not match.</p>
             </div>
 
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</button>
@@ -52,7 +41,21 @@
             @if ($errors->has('verification'))
                 <p class="mt-4 text-blue-500">{{ $errors->first('verification') }}</p>
             @endif
-        </form>
+        </form><p class="text-sm mt-4 text-gray-600">Already have an account? <a href="{{ route('auth.login') }}" class="text-blue-500">Login</a></p>
     </div>
+
+    <script>
+        const form = document.getElementById('signup-form');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('password_confirmation');
+        const passwordMismatch = document.getElementById('password-mismatch');
+
+        form.addEventListener('submit', function(event) {
+            if (password.value !== confirmPassword.value) {
+                event.preventDefault(); // Prevent form submission
+                passwordMismatch.classList.remove('hidden'); // Show the password mismatch message
+            }
+        });
+    </script>
 </body>
 </html>

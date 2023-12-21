@@ -53,7 +53,7 @@ Route::prefix('classrooms')->group(function () {
 
 Route::get('/login', function () {
     return view('auth.login');
-});
+})->name('auth.login');
 
 Route::get('logout', function () {
     return view('auth.logout');
@@ -66,7 +66,6 @@ Route::get('sign_up', function () {
 Route::get('/', function () {
     return view('dashboard');
 });
-
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
