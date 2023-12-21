@@ -23,6 +23,7 @@ class StoreSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
+            'subject_code' => 'required|max:6',
             'semester' => 'required|max:255',
             'description' => 'required|max:255',
             'teacher' => 'required|exists:teachers,id',
