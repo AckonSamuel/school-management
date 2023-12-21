@@ -16,10 +16,6 @@ $table->increments('id');            $table->string('name');
             $table->string('subject_code');
             $table->text('description')->nullable();
             $table->boolean('semester');
-            $table->unsignedInteger('teacher_id');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
-            $table->unsignedInteger('classroom_id');
-            $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->timestamps();
         });
     }
