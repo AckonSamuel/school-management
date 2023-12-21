@@ -52,20 +52,6 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="class_name">Class Name:</label>
-            @if ($student->classroom)
-            <select id="class_name" name="class_name"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @foreach($classrooms as $classroom)
-                <option value="{{ $classroom->id }}" {{ $student->classroom->id === $classroom->id ? 'selected' : '' }}>
-                    {{ $classroom->class_name }}
-                </option>
-                @endforeach
-            </select>
-            @endif
-        </div>
-
-        <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="parent_phone_number">Parent Contact:</label>
             <input type="text" id="parent_phone_number" name="parent_phone_number"
                 value="{{ $student->parent_phone_number }}"
@@ -97,13 +83,6 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="enrollment_date">Enrollment Date:</label>
             <input type="date" id="enrollment_date" name="enrollment_date" value="{{ $student->enrollment_date }}"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        </div>
-
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="photo">Photo:</label>
-            @if ($student->photo)
-            <img src="{{ $student->photo }}" alt="Student's Photo" style="max-width: 300px;">
-            @endif
         </div>
 
         <div class="flex items-center justify-between">

@@ -61,6 +61,26 @@
                 <input type="text" id="address" name="address" value="{{ old('address', $teacher->address) }}" class="w-full border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 px-3 py-2">
             </div>
 
+       <!-- Assign Teacher to Classroom and Subject -->
+       <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Assign Teacher to Classroom:</label>
+            <select name="classroom_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <!-- Loop through classrooms to populate options -->
+                @foreach ($classrooms as $classroom)
+                    <option value="{{ $classroom->id }}">{{ $classroom->class_name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Assign Teacher to Subject:</label>
+            <select name="subject_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <!-- Loop through subjects to populate options -->
+                @foreach ($subjects as $subject)
+                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                @endforeach
+            </select>
+        </div>
             
             <div class="mb-4 flex justify-between">
                 <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Update</button>

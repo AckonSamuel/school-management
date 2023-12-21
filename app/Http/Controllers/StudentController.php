@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAssignmentRequest;
 use App\Models\Classroom;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
+use App\Models\Assignment;
 
 class StudentController extends Controller
 {
@@ -70,4 +70,28 @@ class StudentController extends Controller
             return back()->with('error', 'Failed to delete student. Please try again.');
         }
     }
+
+    public function showAssignToClassroomForm(Student $student)
+{
+    $classrooms = Classroom::all();
+
+    return view('students.assign_to_classroom_form', compact('student', 'classrooms'));
+}
+
+public function assignOrUpdateAssignment(StoreAssignmentRequest $request, Student $student, Assignment $assignment = null)
+{
+    $validated = $request->validated();
+
+    if ($assignment) {
+        $assignment->update($validated);
+    } else {
+        $student->assignments()->updateOrCreate(
+            ['student_id' => $student->id],
+            $validated
+        );
+    }
+
+    return redirect()->route('students.show', $student);
+}
+
 }

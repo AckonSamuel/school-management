@@ -24,7 +24,6 @@ class UpdateStudentRequest extends FormRequest
             'last_name' => 'nullable|max:30',
             'birthday' => 'nullable',
             'student_num' => 'nullable|digits:7',
-            'classroom_id' => 'nullable|exists:classrooms,id',
             'parent_phone_number' => 'nullable|regex:/(0)[0-9]{9}/',
             'enrollment_date' => 'nullable',
             'address' => 'nullable',

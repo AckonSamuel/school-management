@@ -26,7 +26,6 @@ class StoreStudentRequest extends FormRequest
             'last_name' => 'required|max:30',
             'birthday' => 'required',
             'student_num' => 'required|digits:7|unique:students,student_num',
-            'classroom_id' => 'required',
             'parent_phone_number' => 'required|regex:/(0)[0-9]{9}/',
             'enrollment_date' => 'required|date',
             'address' => 'required',

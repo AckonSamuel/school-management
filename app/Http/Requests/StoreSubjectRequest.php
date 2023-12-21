@@ -26,8 +26,6 @@ class StoreSubjectRequest extends FormRequest
             'subject_code' => 'required|max:6',
             'semester' => 'required|max:255',
             'description' => 'required|max:255',
-            'teacher' => 'required|exists:teachers,id',
-            'classroom' => 'required|exists:classrooms,id',
         ];
     }
 }

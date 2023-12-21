@@ -6,7 +6,7 @@
             <li><a href="{{ route('students.index') }}" class="block hover:bg-gray-700 px-4 py-2">Students</a></li>
             <li><a href="{{ route('classrooms.index') }}" class="block hover:bg-gray-700 px-4 py-2">Classrooms</a></li>
             <li><a href="#" class="block hover:bg-gray-700 px-4 py-2">Subjects</a></li>
-            <li><a href="#" class="block hover:bg-gray-700 px-4 py-2">Logout</a></li>
+            <li><a href="{{route('assignments.index')}}" class="block hover:bg-gray-700 px-4 py-2">Assignments</a></li>
         </ul>
     </div>
 </aside>

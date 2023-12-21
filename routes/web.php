@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/verified', function () {
-    return view('verified'); 
+    return view('verified');
 });
 
 // Grouping teacher routes
@@ -27,6 +27,9 @@ Route::prefix('teachers')->group(function () {
     Route::get('{teacher}/edit', [TeacherController::class, 'edit'])->name('teachers.edit');
     Route::delete('{teacher}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
     Route::put('{teacher}', [TeacherController::class, 'update'])->name('teachers.update');
+    // Route::get('{teacher}/assign', [TeachersController::class, 'showAssignmentForm'])->name('teachers.assignmentForm');
+    Route::post('{teacher}/assign', [TeacherController::class, 'assignSubject'])->name('teachers.assign');
+    Route::put('{teacher}/assignments/{assignment}', [TeacherController::class, 'updateAssignment'])->name('teachers.updateAssignment');
 });
 
 // Grouping student routes
@@ -41,6 +44,14 @@ Route::prefix('students')->group(function () {
     Route::get('{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
     Route::delete('{student}', [StudentController::class, 'destroy'])->name('students.destroy');
     Route::put('{student}', [StudentController::class, 'update'])->name('students.update');
+    Route::get('/{student}/assign-to-classroom', [StudentController::class, 'showAssignToClassroomForm'])
+        ->name('students.showAssignToClassroomForm');
+
+    Route::post('/{student}/assign', [StudentController::class, 'assignOrUpdateAssigment'])
+        ->name('students.assignOrUpdateAssigment');
+
+    Route::put('/{student}/assignments/{assignment?}', [StudentController::class, 'assignOrUpdateAssigment'])
+        ->name('students.assignOrUpdateAssigment');
 });
 
 Route::prefix('classrooms')->group(function () {
@@ -79,3 +90,7 @@ Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teac
 
 // Excel route
 Route::get('/teachers/excel', [TeacherController::class, 'exportToExcel'])->name('teachers.excel');
+
+Route::get('assignments', function () {
+    return view('assignment');
+})->name('assignments.index');

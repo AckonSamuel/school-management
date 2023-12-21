@@ -28,12 +28,10 @@
                         <td class="font-semibold">Student Number:</td>
                         <td>{{ $student->student_num }}</td>
                     </tr>
-                    @if ($student->classroom)
                         <tr>
                             <td class="font-semibold">Class Name:</td>
-                            <td>{{ $student->classroom->class_name }}</td>
+                            <td>{{$student->classroom ? $student->classroom->class_name : 'No Classroom Assigned'}}</td>
                         </tr>
-                    @endif
                     <tr>
                         <td class="font-semibold">Parent Contact:</td>
                         <td>{{ $student->parent_phone_number }}</td>

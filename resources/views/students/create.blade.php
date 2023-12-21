@@ -82,14 +82,6 @@
                     <td class="py-2">
                         <label for="classroom_id" class="block text-gray-700 text-sm font-bold mb-2">Class Name:</label>
                     </td>
-                    <td class="py-2">
-                        <select id="classroom_id" name="classroom_id"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            @foreach($classrooms as $classroom)
-                                <option value="{{ $classroom->id }}">{{ $classroom->class_name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
                 </tr>
                 <tr>
                     <td class="py-2">

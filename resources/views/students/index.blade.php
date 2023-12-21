@@ -27,11 +27,12 @@
                                 <td class="border px-4 py-2">{{ $student->id }}</td>
                                 <td class="border px-4 py-2">{{ $student->first_name }}</td>
                                 <td class="border px-4 py-2">{{ $student->last_name }}</td>
-                                <td class="border px-4 py-2">{{ $student->classroom->class_name }}</td>
+                                <td class="border px-4 py-2">{{ $student->classroom ? $student->classroom->class_name : 'N/A' }}</td>
                                 <td class="border px-4 py-2">{{ $student->parent_phone_number }}</td>
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('students.show', $student->id) }}" class="text-blue-600 hover:underline mr-2">View</a>
                                     <a href="{{ route('students.edit', $student->id) }}" class="text-green-600 hover:underline mr-2">Edit</a>
+                                    <a href="{{ route('students.showAssignToClassroomForm', $student->id) }}" class="text-green-600 hover:underline mr-2">Assign classroom</a>
                                     <form action="{{ route('students.destroy', $student->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')

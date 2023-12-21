@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\Http\Requests\StoreAssignmentRequest;
+use App\Http\Requests\UpdateAssignmentRequest;
 use App\Exports\ExcelExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
+use App\Models\Assignment;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -96,5 +99,24 @@ class TeacherController extends Controller
     public function edit(Teacher $teacher)
     {
         return view('teachers.edit', compact('teacher'));
+    }
+
+    public function assignSubject(StoreAssignmentRequest $request, Teacher $teacher)
+    {
+        $validated = $request->validated();
+
+        $assignment = new Assignment($validated);
+        $teacher->assignments()->save($assignment);
+
+        return redirect()->route('teachers.show', $teacher);
+    }
+
+    public function updateAssignment(UpdateAssignmentRequest $request, Teacher $teacher, Assignment $assignment)
+    {
+        $validated = $request->validated();
+
+        $assignment->update($validated);
+
+        return redirect()->route('teachers.show', $teacher);
     }
 }
