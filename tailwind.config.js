@@ -9,5 +9,6 @@ export default {
     extend: {},
   },
   plugins: [],
+  ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
 }
 
