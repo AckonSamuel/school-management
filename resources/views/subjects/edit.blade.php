@@ -16,7 +16,7 @@
         @endif
 
         <div class="mt-2 mb-4 flex justify-between">
-            <a href="{{ route('classrooms.index', $classroom->id) }}" class="flex items-center text-black ml-4 hover:underline">
+            <a href="{{ route('subjects.index', $classroom->id) }}" class="flex items-center text-black ml-4 hover:underline">
                 <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
@@ -24,20 +24,20 @@
             </a>
         </div>
 
-        <form action="{{ route('classrooms.update', $classroom->id) }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('subjects.update', $classroom->id) }}" method="POST" enctype="multipart/form-data"
               class="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
             @method('PUT')
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="class_name">Classroom Name:</label>
-                <input type="text" id="class_name" name="class_name" value="{{ $classroom->class_name }}"
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="subject_name">subject Name:</label>
+                <input type="text" id="subject_name" name="subject_name" value="{{ $subject->subject_name }}"
                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                        maxlength="30">
             </div>
 
             <div class="mb-4">
-            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Classroom Description:</label>
+            <label for="description" class="block text-gray-700 text-sm font-bold mb-2"> Description:</label>
             <textarea id="description" name="description"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ old('description') }}</textarea>
             @error('description')
