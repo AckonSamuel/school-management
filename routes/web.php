@@ -47,6 +47,7 @@ Route::prefix('classrooms')->group(function () {
     Route::get('/', [ClassroomController::class, 'index'])->name('classrooms.index');
     Route::post('/', [ClassroomController::class, 'store'])->name('classrooms.store');
     Route::get('/{classroom}', [ClassroomController::class, 'show'])->name('classrooms.show');
+    Route::get('{classroom}/edit', [ClassroomController::class, 'edit'])->name('classrooms.edit');
     Route::put('/{classroom}', [ClassroomController::class, 'update'])->name('classrooms.update');
     Route::delete('/{classroom}', [ClassroomController::class, 'destroy'])->name('classrooms.destroy');
 });

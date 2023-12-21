@@ -50,6 +50,10 @@
                         <td class="font-semibold">Address:</td>
                         <td>{{ $student->address }}</td>
                     </tr>
+                    <tr>
+                        <td class="font-semibold">Enrollment Date:</td>
+                        <td>{{ $student->enrollment_date }}</td>
+                    </tr>
                 </tbody>
             </table>
             

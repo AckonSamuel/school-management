@@ -14,10 +14,10 @@
                     <thead class="bg-gray-800 text-white">
                         <tr>
                             <th class="px-4 py-2">ID</th>
-                            <th class="px-4 py-2">Name</th>
-                            <th class="px-4 py-2">Email</th>
-                            <th class="px-4 py-2">Contact</th>
-                            <th class="px-4 py-2">Address</th>
+                            <th class="px-4 py-2">First Name</th>
+                            <th class="px-4 py-2">Last Name</th>
+                            <th class="px-4 py-2">Class</th>
+                            <th class="px-4 py-2">Parent Contact</th>
                             <th class="px-4 py-2">Actions</th>
                         </tr>
                     </thead>
@@ -26,9 +26,9 @@
                             <tr>
                                 <td class="border px-4 py-2">{{ $student->id }}</td>
                                 <td class="border px-4 py-2">{{ $student->first_name }}</td>
-                                <td class="border px-4 py-2">{{ $student->email }}</td>
-                                <td class="border px-4 py-2">{{ $student->phone_number }}</td>
-                                <td class="border px-4 py-2">{{ $student->address }}</td>
+                                <td class="border px-4 py-2">{{ $student->last_name }}</td>
+                                <td class="border px-4 py-2">{{ $student->classroom->class_name }}</td>
+                                <td class="border px-4 py-2">{{ $student->parent_phone_number }}</td>
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('students.show', $student->id) }}" class="text-blue-600 hover:underline mr-2">View</a>
                                     <a href="{{ route('students.edit', $student->id) }}" class="text-green-600 hover:underline mr-2">Edit</a>
