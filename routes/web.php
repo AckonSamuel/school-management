@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AssignmentController;
@@ -19,11 +20,8 @@ Route::get('/verified', function () {
 // Grouping teacher routes
 Route::prefix('teachers')->group(function () {
     Route::get('create', [TeacherController::class, 'create'])->name('teachers.create');
-    Route::get('store', function () {
-        return view('teachers.store');
-    });
     Route::get('{teacher}', [TeacherController::class, 'show'])->name('teachers.show');
-    Route::post('/', [TeacherController::class, 'store'])->name('teachers.store');
+    Route::post('/create', [TeacherController::class, 'store'])->name('teachers.store');
     Route::get('/', [TeacherController::class, 'index'])->name('teachers.index');
     Route::get('{teacher}/edit', [TeacherController::class, 'edit'])->name('teachers.edit');
     Route::delete('{teacher}', [TeacherController::class, 'destroy'])->name('teachers.destroy');
@@ -94,3 +92,5 @@ Route::post('/assignments', [StudentController::class, 'assignOrUpdateAssignment
         ->name('students.assignOrUpdateAssignment');
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');

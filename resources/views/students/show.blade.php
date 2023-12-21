@@ -31,13 +31,6 @@
                     <td>{{ $student->student_num }}</td>
                 </tr>
                 <tr>
-                    <td class="font-semibold">Class Name:</td>
-                    <td>
-                        {{ $student->assignments->isNotEmpty() ? $student->assignments->first()->classroom->class_name : 'No Classroom
-                        Assigned' }}
-                    </td>
-                </tr>
-                <tr>
                     <td class="font-semibold">Parent Contact:</td>
                     <td>{{ $student->parent_phone_number }}</td>
                 </tr>

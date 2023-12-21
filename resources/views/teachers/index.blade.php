@@ -4,9 +4,11 @@
     <div class="py-6">
         <h1 class="text-2xl font-bold mb-4">Teachers List</h1>
 
+        <a href="{{ route('teachers.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4 inline-block">Create New teacher</a>
         @if($teachers->isEmpty())
             <p>No teachers available</p>
         @else
+
             <div class="flex items-center mb-4">
                 <a href="{{ route('teachers.pdf') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mr-2">Download PDF</a>
                 <a href="{{ route('teachers.excel') }}" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600 mr-2">Download Excel</a>

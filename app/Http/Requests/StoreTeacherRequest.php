@@ -25,10 +25,18 @@ class StoreTeacherRequest extends FormRequest
             'first_name' => 'required|max:30',
             'last_name' => 'required|max:30',
             'birthday' => 'required',
+            'teacher_num' => 'required|digits:7|unique:teachers,teacher_num',
             'email' => 'required|email|unique:teachers,email',
-            'phone_number' => 'required|regex:/(0)[0-9]{10}/',
+            'phone_number' => 'required|regex:/(0)[0-9]{9}/',
             'address' => 'required',
             'gender' => 'required|in:male,female', // Modify 'male' and 'female' as needed
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'phone_number.regex' => 'The phone number must be in the format 0244974077'
         ];
     }
 }

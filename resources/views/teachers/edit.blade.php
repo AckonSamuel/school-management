@@ -52,6 +52,12 @@
             </div>
 
             <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="teacher_num">Teacher Number:</label>
+            <input type="text" id="teacher_num" name="teacher_num" value="{{ $teacher->teacher_num }}"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+
+            <div class="mb-4">
                 <label for="photo" class="block text-gray-700 font-semibold mb-1">Photo:</label>
                 <input type="file" id="photo" name="photo" accept="image/jpeg, image/bmp, image/png" class="w-full border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 px-3 py-2">
             </div>
