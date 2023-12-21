@@ -14,12 +14,10 @@ class Classroom extends Model
         'description',
     ];
 
-    public function subjects() {
-        return $this->hasMany(Subject::class);
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
     }
 
-    public function students() {
-        return $this->hasMany(Student::class);
-    }
 
 }

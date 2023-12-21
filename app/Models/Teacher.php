@@ -22,13 +22,8 @@ class Teacher extends Model
         'gender',
     ];
 
-    public function subjects()
+    public function assignments()
     {
-        return $this->hasMany(Subject::class);
-    }
-
-    public function classrooms()
-    {
-        return $this->belongsToMany(Classroom::class, 'subjects', 'teacher_id', 'classroom_id');
+        return $this->hasMany(Assignment::class);
     }
 }

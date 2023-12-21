@@ -22,8 +22,8 @@ class Student extends Model
         'enrollment_date',
     ];
 
-    public function classroom()
+    public function assignments()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->hasMany(Assignment::class);
     }
 }

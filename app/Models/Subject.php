@@ -18,13 +18,8 @@ class Subject extends Model
         'classroom_id',
     ];
 
-    public function classroom()
+    public function assignments()
     {
-        return $this->belongsTo(Classroom::class);
-    }
-
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class);
+        return $this->hasMany(Assignment::class);
     }
 }
