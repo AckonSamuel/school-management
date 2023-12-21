@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAssignmentRequest;
+use App\Http\Requests\UpdateAssignmentRequest;
 use App\Models\Classroom;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
 use App\Models\Assignment;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -78,20 +80,14 @@ class StudentController extends Controller
     return view('students.assign_to_classroom_form', compact('student', 'classrooms'));
 }
 
-public function assignOrUpdateAssignment(StoreAssignmentRequest $request, Student $student, Assignment $assignment = null)
+public function  assignOrUpdateAssignment(UpdateAssignmentRequest $request)
 {
     $validated = $request->validated();
 
-    if ($assignment) {
-        $assignment->update($validated);
-    } else {
-        $student->assignments()->updateOrCreate(
-            ['student_id' => $student->id],
-            $validated
-        );
-    }
-
-    return redirect()->route('students.show', $student);
+    Assignment::create($validated);
+    
+    return redirect()->route('students.index');
 }
+
 
 }

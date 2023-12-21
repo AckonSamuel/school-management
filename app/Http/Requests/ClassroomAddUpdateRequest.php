@@ -24,7 +24,7 @@ class ClassroomAddUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:30',
+            'class_name' => 'required|max:30',
             'description' => 'required|max:100',
         ];
     }

@@ -30,11 +30,11 @@
                     </tr>
                     <tr>
                         <td class="font-semibold">Students Count:</td>
-                        <td>{{ $classroom->students->count() }}</td>
+                        <td>{{ $classroom->students ? $classroom->students->count() : 0 }}</td>
                     </tr>
                     <tr>
                         <td class="font-semibold">Assigned Teacher:</td>
-                        <td>{{ $classroom->teacher->name ?? 'Not Assigned' }}</td>
+                        <td>{{ $classroom->teacher ? $classroom->teacher->first_name . ' ' . $classroom->teacher->last_name : 'Not Assigned' }}</td>
                     </tr>
                 </tbody>
             </table>

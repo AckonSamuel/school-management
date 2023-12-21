@@ -5,6 +5,7 @@ use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -46,16 +47,15 @@ Route::prefix('students')->group(function () {
     Route::put('{student}', [StudentController::class, 'update'])->name('students.update');
     Route::get('/{student}/assign-to-classroom', [StudentController::class, 'showAssignToClassroomForm'])
         ->name('students.showAssignToClassroomForm');
-
-    Route::post('/{student}/assign', [StudentController::class, 'assignOrUpdateAssigment'])
-        ->name('students.assignOrUpdateAssigment');
-
-    Route::put('/{student}/assignments/{assignment?}', [StudentController::class, 'assignOrUpdateAssigment'])
-        ->name('students.assignOrUpdateAssigment');
+    Route::post('/assignments', [StudentController::class, 'assignOrUpdateAssignment'])
+        ->name('students.assignOrUpdateAssignment');
 });
 
 Route::prefix('classrooms')->group(function () {
     Route::get('/', [ClassroomController::class, 'index'])->name('classrooms.index');
+    Route::get('/create', function () {
+        return view('classrooms.create');
+    })->name('classrooms.create');
     Route::post('/', [ClassroomController::class, 'store'])->name('classrooms.store');
     Route::get('/{classroom}', [ClassroomController::class, 'show'])->name('classrooms.show');
     Route::get('{classroom}/edit', [ClassroomController::class, 'edit'])->name('classrooms.edit');
@@ -69,7 +69,7 @@ Route::get('/login', function () {
 
 Route::get('logout', function () {
     return view('auth.logout');
-});
+})->name('logout');
 
 Route::get('sign_up', function () {
     return view('auth.sign_up');
@@ -90,7 +90,7 @@ Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teac
 
 // Excel route
 Route::get('/teachers/excel', [TeacherController::class, 'exportToExcel'])->name('teachers.excel');
+Route::post('/assignments', [StudentController::class, 'assignOrUpdateAssignment'])
+        ->name('students.assignOrUpdateAssignment');
 
-Route::get('assignments', function () {
-    return view('assignment');
-})->name('assignments.index');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');

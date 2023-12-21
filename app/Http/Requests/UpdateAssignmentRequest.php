@@ -11,7 +11,7 @@ class UpdateAssignmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,10 +22,8 @@ class UpdateAssignmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'teacher_id' => 'exists:teachers,id',
-            'classroom_id' => 'exists:classrooms,id',
-            'subject_id' => 'exists:subjects,id',
-            'student_id' => 'exists:students,id',
+            'classroom_id' => 'nullable|exists:classrooms,id',
+            'student_id' => 'required|exists:students,id',
         ];
     }
 }
