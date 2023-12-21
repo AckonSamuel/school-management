@@ -37,6 +37,6 @@
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
     </form>
 
-    <p class="text-gray-600">Don't have an account? <a href="{{ route('sign_up') }}" class="text-blue-500">Sign Up</a></p>
+    <p class="text-gray-600">Don't have an account yet? <a href="{{ route('sign_up') }}" class="text-blue-500">Sign Up</a></p>
 </body>
 </html>
