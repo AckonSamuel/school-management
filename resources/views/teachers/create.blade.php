@@ -76,15 +76,6 @@
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </td>
                 </tr>
-                <tr>
-                    <td class="py-2">
-                        <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Address:</label>
-                    </td>
-                    <td class="py-2">
-                        <input type="text" id="address" name="address" value="{{ old('address') }}"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    </td>
-                </tr>
                 <td class="py-2">
         <label for="teacher_num" class="block text-gray-700 text-sm font-bold mb-2">Teacher Number:</label>
     </td>
