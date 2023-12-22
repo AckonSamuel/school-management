@@ -15,7 +15,7 @@
             </div>
         @endif
         
-        <form action="{{ route('teachers.store') }}" method="POST">
+        <form action="https://dotnut-9337e56f7347.herokuapp.com/teachers/" method="POST">
             @csrf
 
             <table class="w-full">
