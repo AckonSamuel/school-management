@@ -22,7 +22,7 @@
             </div>
         @endif
         
-        <form action="{{ 'https://dotnut-9337e56f7347.herokuapp.com/teachers/' . $teacher->id }}" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto">
+        <form action="{{ route('teachers.update', $teacher->id) }}" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto">
             @csrf
             @method('PUT')
 
