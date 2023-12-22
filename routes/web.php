@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ChartJSController;
@@ -61,6 +62,19 @@ Route::prefix('classrooms')->group(function () {
     Route::delete('/{classroom}', [ClassroomController::class, 'destroy'])->name('classrooms.destroy');
 });
 
+Route::prefix('subjects')->group(function () {
+    Route::get('/', [SubjectController::class, 'index'])->name('subjects.index');
+    Route::get('/create', function () {
+        return view('subjects.create');
+    })->name('subjects.create');
+    Route::post('/', [SubjectController::class, 'store'])->name('subjects.store');
+    Route::get('/{subject}', [SubjectController::class, 'show'])->name('subjects.show');
+    Route::get('{subject}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');
+    Route::put('/{subject}', [SubjectController::class, 'update'])->name('subjects.update');
+    Route::delete('/{subject}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
+});
+
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name('auth.login');
@@ -83,11 +97,8 @@ Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
 
-// PDF route
-Route::get('/teachers/pdf', [TeacherController::class, 'createPDF'])->name('teachers.pdf');
-
 // Excel route
-Route::get('/teachers/excel', [TeacherController::class, 'exportToExcel'])->name('teachers.excel');
+// Route::get('/teachers/excel', [TeacherController::class, 'importExcel'])->name('teachers.excel');
 Route::post('/assignments', [StudentController::class, 'assignOrUpdateAssignment'])
         ->name('students.assignOrUpdateAssignment');
 

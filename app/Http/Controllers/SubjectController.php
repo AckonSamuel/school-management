@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubjectRequest;
@@ -13,12 +12,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        try {
-            $subjects = Subject::with(['classroom', 'teacher'])->paginate(10);
-            return response()->json($subjects);
-        } catch (\Exception $exception) {
-            return response()->json(['error' => $exception->getMessage()], 500);
-        }
+        $subjects = Subject::all();
+        return view('subjects.index', compact('subjects'));
     }
     
     /**
@@ -29,9 +24,9 @@ class SubjectController extends Controller
         try {
             $validated = $request->validated();
             $subject = Subject::create($validated);
-            return response()->json($subject, 201);
+            return view('subjects.show', compact('subject'))->with('success', 'Subject created successfully');
         } catch (\Exception $exception) {
-            return response()->json(['error' => $exception->getMessage()], 500);
+            return view('error')->with('error', $exception->getMessage());
         }
     }    
 
@@ -41,9 +36,9 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     {
         try {
-            return response()->json($subject);
+            return view('subjects.show', compact('subject'));
         } catch (\Exception $exception) {
-            return response()->json(['error' => $exception->getMessage()], 500);
+            return view('error')->with('error', $exception->getMessage());
         }
     }
     
@@ -56,10 +51,17 @@ class SubjectController extends Controller
         try {
             $validated = $request->validated();
             $subject->update($validated);
-            return response()->json($subject);
+            return view('subjects.show', compact('subject'))->with('success', 'Subject updated successfully');
         } catch (\Exception $exception) {
-            return response()->json(['error' => $exception->getMessage()], 500);
+            return view('error')->with('error', $exception->getMessage());
         }
+    }
+
+    public function edit($id)
+    {
+        $subject = Subject::findOrFail($id);
+    
+        return view('subjects.edit', compact('subject'));
     }
     
 
@@ -70,10 +72,9 @@ class SubjectController extends Controller
     {
         try {
             $subject->delete();
-            return response()->json(['message' => 'Subject deleted successfully']);
+            return redirect()->route('subjects.index')->with('success', 'Subject deleted successfully');
         } catch (\Exception $exception) {
-            return response()->json(['error' => $exception->getMessage()], 500);
+            return view('error')->with('error', $exception->getMessage());
         }
     }
-    
 }
