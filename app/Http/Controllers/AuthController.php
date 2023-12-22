@@ -52,7 +52,7 @@ class AuthController extends Controller
 
             $token = $user->createToken('apiToken')->plainTextToken;
 
-            return redirect('/')->with('token', $token);
+            return view('/')->with('token', $token);
         } catch (\Exception $e) {
             return view('auth.login')->withErrors(['error' => 'Login failed. Please try again.']);
         }
