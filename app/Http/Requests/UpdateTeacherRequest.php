@@ -31,6 +31,7 @@ class UpdateTeacherRequest extends FormRequest
             'phone_number' => 'required|regex:/(0)[0-9]{9}/',
             'photo' => 'required|mimes:jpeg,bmp,png,jpg|max:2048',
             'address' => 'required',
+            'classroom_id' => 'nullable|exists:classrooms,id',
         ];
     }
     

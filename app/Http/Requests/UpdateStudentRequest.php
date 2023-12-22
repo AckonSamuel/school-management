@@ -28,6 +28,7 @@ class UpdateStudentRequest extends FormRequest
             'enrollment_date' => 'nullable',
             'address' => 'nullable',
             'gender' => 'nullable',
+            'classroom_id' => 'nullable|exists:classrooms,id',
         ];
     }
 

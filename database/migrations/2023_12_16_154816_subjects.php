@@ -15,7 +15,11 @@ return new class extends Migration {
             $table->string('name');
             $table->string('subject_code');
             $table->text('description')->nullable();
-            $table->boolean('semester');
+            $table->integer('semester');
+            $table->unsignedBigInteger('student_id')->nullable()->constrained();
+            $table->unsignedBigInteger('teacher_id')->nullable()->constrained();
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
         });
     }

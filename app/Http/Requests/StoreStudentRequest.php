@@ -30,6 +30,7 @@ class StoreStudentRequest extends FormRequest
             'enrollment_date' => 'required|date',
             'address' => 'required',
             'gender' => 'required|in:male,female',
+            'classroom_id' => 'nullable|exists:classrooms,id',
         ];
     }
 

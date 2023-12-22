@@ -22,8 +22,13 @@ class Student extends Model
         'enrollment_date',
     ];
 
-    public function assignments()
+    public function subjects()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->hasMany(Subject::class);
+    }
+
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class);
     }
 }

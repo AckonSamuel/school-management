@@ -15,11 +15,16 @@ class Subject extends Model
         'semester',
         'subject_code',
         'teacher_id',
-        'classroom_id',
+        'student_id',
     ];
 
-    public function assignments()
+    public function students()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->belongsTo(Student::class);
+    }
+
+    public function teachers()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 }

@@ -20,10 +20,16 @@ class Teacher extends Model
         'photo_path',
         'address',
         'gender',
+        'classroom_id'
     ];
 
-    public function assignments()
+    public function classrooms()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->belongsTo(Classroom::class);
+    }
+
+    public function subject()
+    {
+        return $this->hasMany(Subject::class);
     }
 }

@@ -29,7 +29,8 @@ class StoreTeacherRequest extends FormRequest
             'email' => 'required|email|unique:teachers,email',
             'phone_number' => 'required|regex:/(0)[0-9]{9}/',
             'address' => 'required',
-            'gender' => 'required|in:male,female', // Modify 'male' and 'female' as needed
+            'gender' => 'required|in:male,female',
+            'classroom_id' => 'nullable|exists:classrooms,id', // Modify 'male' and 'female' as needed
         ];
     }
 
