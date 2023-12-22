@@ -21,12 +21,51 @@
         <p class="text-4xl font-bold">{{ $subjectsCount }}</p>
     </div>
 </div>
-
-    <!-- Additional Sections -->
-    <div class="mt-8">
-        <!-- Other sections or content -->
+<div class="mt-8">
+            <canvas id="myChart" class="w-full h-60"></canvas>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
-</script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Students', 'Teachers', 'Classrooms', 'Subjects'],
+                datasets: [{
+                    label: 'Entity population',
+                    data: [{{ $studentsCount }}, {{ $teachersCount }}, {{ $classroomsCount }}, {{ $subjectsCount }}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132)', // Red
+                        'rgba(54, 162, 235)', // Blue
+                        'rgba(255, 205, 86)', // Yellow
+                        'rgba(75, 192, 192)', // Green
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'x',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

@@ -31,4 +31,5 @@
         <p>&copy; 2023 School Management System. All rights reserved.</p>
     </footer>
 </body>
+@yeild('chart')
 </html>
