@@ -43,7 +43,7 @@
 
         <div class="mb-4">
             <label for="semester" class="block text-gray-700 text-sm font-bold mb-2">Semester:</label>
-            <input type="text" id="semester" name="semester" value="{{ $subject->semester ?? old('semester') }}" maxlength="255"
+            <input type="number" id="semester" name="semester" value="{{ $subject->semester ?? old('semester') }}" maxlength="255"
                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
 
