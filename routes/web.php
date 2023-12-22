@@ -10,14 +10,12 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ChartJSController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/verified', function () {
     return view('verified');
 });
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
 // Grouping teacher routes
 Route::prefix('teachers')->group(function () {
     Route::get('create', [TeacherController::class, 'create'])->name('teachers.create');
@@ -87,9 +85,7 @@ Route::get('sign_up', function () {
     return view('auth.sign_up');
 });
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
@@ -103,8 +99,6 @@ Route::post('/assignments', [StudentController::class, 'assignOrUpdateAssignment
         ->name('students.assignOrUpdateAssignment');
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Assignment routes
 
