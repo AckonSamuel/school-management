@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAssignmentRequest;
+use App\Models\Subject;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateAssignmentRequest;
 use App\Models\Classroom;
 use App\Http\Requests\StoreStudentRequest;
@@ -89,5 +90,43 @@ public function  assignOrUpdateAssignment(UpdateAssignmentRequest $request)
     return redirect()->route('students.index');
 }
 
+public function assignStudentToSubject(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'subject_id' => 'required|exists:subjects,id',
+        ]);
 
+        $student = Student::findOrFail($request->input('student_id'));
+        $student->subjects()->attach($request->input('subject_id'));
+
+        return redirect()->back()->with('success', 'Student assigned to subject successfully.');
+    }
+
+    public function assignStudentToClassroom(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'classroom_id' => 'required|exists:classrooms,id',
+        ]);
+
+        $student = Student::findOrFail($request->input('student_id'));
+        $student->classrooms()->attach($request->input('classroom_id'));
+
+        return redirect()->back()->with('success', 'Student assigned to classroom successfully.');
+    }
+
+    public function assignStudentToClassroomForm() {
+        $students = Student::all();
+        $classrooms = Classroom::all();
+        return view('students.assign_students_to_classrooms_form', compact('students', 'classrooms'));   
+    }
+
+    public function assignStudentToSubjectForm() {
+        $students = Student::all();
+        $subjects = Subject::all();
+        return view('students.assign_students_to_subjects_form', compact('students', 'subjects'));   
+    }
 }

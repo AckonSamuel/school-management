@@ -17,7 +17,7 @@
                             <th class="px-4 py-2">Classroom Name</th>
                             <th class="px-4 py-2">Students Count</th>
                             <th class="px-4 py-2">Description</th>
-                            <th class="px-4 py-2">Assigned Teacher</th>
+                            <th class="px-4 py-2">Assigned Teacher Count</th>
                             <th class="px-4 py-2">Actions</th>
                         </tr>
                     </thead>
@@ -28,7 +28,7 @@
                                 <td class="border px-4 py-2">{{ $classroom->class_name }}</td>
                                 <td class="border px-4 py-2">{{ $classroom->students ? $classroom->students->count() : 0 }}</td>
                                 <td class="border px-4 py-2">{{ $classroom->description }}</td>
-                                <td class="border px-4 py-2">{{ $classroom->teacher->name ?? 'Not Assigned' }}</td>
+                                <td class="border px-4 py-2">{{ $classroom->teachers ? $classroom->teachers->count() : 0 }}</td>
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('classrooms.show', $classroom->id) }}" class="text-blue-600 hover:underline mr-2">View</a>
                                     <a href="{{ route('classrooms.update', $classroom->id) }}" class="text-green-600 hover:underline mr-2">Edit</a>

@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Teacher;
+use App\Models\Subject;
+use App\Models\Classroom;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
 
@@ -118,5 +120,45 @@ class TeacherController extends Controller
         $assignment->update($validated);
 
         return redirect()->route('teachers.show', $teacher);
+    }
+
+    public function assignTeacherToSubject(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'teacher_id' => 'required|exists:teachers,id',
+            'subject_id' => 'required|exists:subjects,id',
+        ]);
+
+        $subject = Subject::findOrFail($request->input('subject_id'));
+        $subject->update(['teacher_id' => $request->input('teacher_id')]);
+
+        return redirect()->back()->with('success', 'Teacher assigned to subject successfully.');
+    }
+
+    public function assignTeacherToClassroom(Request $request)
+    {
+        // Validate request
+        $request->validate([
+            'teacher_id' => 'required|exists:teachers,id',
+            'classroom_id' => 'required|exists:classrooms,id',
+        ]);
+
+        $teacher = Teacher::findOrFail($request->input('teacher_id'));
+        $teacher->classrooms()->attach($request->input('classroom_id'));
+
+        return redirect()->back()->with('success', 'Teacher assigned to classroom successfully.');
+    }
+
+    public function assignTeacherToClassroomForm() {
+        $teachers = Teacher::all();
+        $classrooms = Classroom::all();
+        return view('teachers.assign_teachers_to_classrooms_form', compact('teachers', 'classrooms'));   
+    }
+
+    public function assignTeacherToSubjectForm() {
+        $teachers = Teacher::all();
+        $subjects = Subject::all();
+        return view('teachers.assign_teachers_to_subjects_form', compact('teachers', 'subjects'));   
     }
 }

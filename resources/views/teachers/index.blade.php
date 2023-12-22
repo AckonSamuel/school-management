@@ -15,6 +15,13 @@
     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Export to Excel
     </button>
+    <a href="{{ route('assign.teacher.classroom.form') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Assign Teacher to Classroom
+</a>
+<a href="{{ route('assign.teacher.subject.form') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Assign Teacher to Subject
+</a>
+
 </form>
             </div>
             <div class="overflow-x-auto">

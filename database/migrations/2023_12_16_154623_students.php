@@ -21,8 +21,6 @@ return new class extends Migration {
             $table->string('second_phone_number')->nullable();
             $table->string('gender');
             $table->date('enrollment_date');
-            $table->unsignedBigInteger('classroom_id')->nullable()->constrained();
-            $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->timestamps();
         });
     }

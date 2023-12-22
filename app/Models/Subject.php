@@ -14,17 +14,15 @@ class Subject extends Model
         'description',
         'semester',
         'subject_code',
-        'teacher_id',
-        'student_id',
     ];
 
     public function students()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsToMany(Student::class, 'student_subject');
     }
 
     public function teachers()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsToMany(Teacher::class, 'teacher_subject');
     }
 }

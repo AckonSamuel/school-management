@@ -18,17 +18,16 @@ class Student extends Model
         'parent_phone_number',
         'second_phone_number',
         'gender',
-        'classroom_id',
         'enrollment_date',
     ];
 
     public function subjects()
     {
-        return $this->hasMany(Subject::class);
+        return $this->belongsToMany(Subject::class, 'student_subject');
     }
 
-    public function classroom()
+    public function classrooms()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->belongsToMany(Classroom::class, 'student_classroom');
     }
 }

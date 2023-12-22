@@ -25,8 +25,9 @@ class SubjectController extends Controller
             $validated = $request->validated();
             $subject = Subject::create($validated);
             return view('subjects.show', compact('subject'))->with('success', 'Subject created successfully');
-        } catch (\Exception $exception) {
-            return view('error')->with('error', $exception->getMessage());
+        } catch (\Exception $e) {
+            \Log::error('Subject creation error: ' . $e->getMessage());
+            return back()->withInput()->with('error', 'Failed to Subject teacher. Please try again.');
         }
     }    
 

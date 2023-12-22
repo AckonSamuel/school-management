@@ -16,8 +16,8 @@
                             <th class="px-4 py-2">ID</th>
                             <th class="px-4 py-2">subject Name</th>
                             <th class="px-4 py-2">Description</th>
-                            <th class="px-4 py-2">Assigned Teacher</th>
-                            <th class="px-4 py-2">Students Count</th>
+                            <th class="px-4 py-2">Assigned Teachers Count</th>
+                            <th class="px-4 py-2">Assigned Students Count</th>
                             <th class="px-4 py-2">Actions</th>
                         </tr>
                     </thead>
@@ -27,8 +27,8 @@
                                 <td class="border px-4 py-2">{{ $subject->id }}</td>
                                 <td class="border px-4 py-2">{{ $subject->name }}</td>
                                 <td class="border px-4 py-2">{{ $subject->description }}</td>
-                                <td class="border px-4 py-2">{{ $subject->teacher->name ?? 'Not Assigned' }}</td>
-                                <td class="border px-4 py-2">{{ $subject->student_id ? $subject->students->count() : 0 }}</td>
+                                <td class="border px-4 py-2">{{ $subject->teachers ? $subject->teachers->count() : 0 }}</td>
+                                <td class="border px-4 py-2">{{ $subject->students ? $subject->students->count() : 0 }}</td>
                                 <td class="border px-4 py-2">
                                     <a href="{{ route('subjects.show', $subject->id) }}" class="text-blue-600 hover:underline mr-2">View</a>
                                     <a href="{{ route('subjects.update', $subject->id) }}" class="text-green-600 hover:underline mr-2">Edit</a>

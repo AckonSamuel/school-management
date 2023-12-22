@@ -105,3 +105,19 @@ Route::post('/assignments', [StudentController::class, 'assignOrUpdateAssignment
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Assignment routes
+
+Route::post('/assign/teacher/classroom', [TeacherController::class, 'assignTeacherToClassroom'])->name('assign.teacher.classroom');
+
+Route::post('/assign/teacher/subject', [TeacherController::class , 'assignTeacherToSubject'])->name('assign.teacher.subject');
+
+Route::post('/assign/student/classroom', [StudentController::class, 'assignStudentToClassroom'])->name('assign.student.classroom');
+
+Route::post('/assign/student/subject', [StudentController::class, 'assignStudentToSubject'])->name('assign.student.subject');
+
+// assignment forms 
+Route::get('/assign-teacher-to-classroom', [TeacherController::class, 'assignTeacherToClassroomForm'])->name('assign.teacher.classroom.form');
+Route::get('/assign-teacher-to-subject', [TeacherController::class, 'assignTeacherToSubjectForm'])->name('assign.teacher.subject.form');
+Route::get('/assign-student-to-classroom', [StudentController::class, 'assignStudentToClassroomForm'])->name('assign.student.classroom.form');
+Route::get('/assign-student-to-subject', [StudentController::class, 'assignStudentToSubjectForm'])->name('assign.student.subject.form');

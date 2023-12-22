@@ -21,8 +21,6 @@ return new class extends Migration {
             $table->text('photo_path')->nullable();
             $table->string('address')->nullable();
             $table->string('gender');
-            $table->unsignedBigInteger('classroom_id')->nullable()->constrained();
-            $table->foreign('classroom_id')->references('id')->on('classrooms');
             $table->timestamps();
         });
     }
