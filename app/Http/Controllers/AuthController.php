@@ -9,7 +9,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function sign_up(Request $request)
+    public function signUp(Request $request)
     {
         try {
             $data = $request->validate([
@@ -18,24 +18,21 @@ class AuthController extends Controller
                 'password' => 'required|string|confirmed'
             ]);
     
-            // Check if the email already exists
-            $user = User::create([
+            User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => bcrypt($data['password'])
             ]);
     
-            $user->sendEmailVerificationNotification();
-    
+            // Send verification email or perform any other necessary action
             return redirect()->back()->with('success', 'Verification link sent to email');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors($e->getMessage());
+            return redirect()->back()->withErrors('Error creating user.');
         }
     }
     
-
     public function login(Request $request)
     {
         try {
@@ -52,8 +49,8 @@ class AuthController extends Controller
 
             $token = $user->createToken('apiToken')->plainTextToken;
 
-            dd("hello");
-            return view('/')->with('token', $token);
+            // Redirect to the dashboard or any other authenticated page
+            return redirect('/')->with('token', $token);
         } catch (\Exception $e) {
             return view('auth.login')->withErrors(['error' => 'Login failed. Please try again.']);
         }
@@ -63,9 +60,9 @@ class AuthController extends Controller
     {
         try {
             $request->user()->currentAccessToken()->delete();
-            return redirect()->back()->withErrors(['success' => 'Logged out successfully']);
+            return redirect('/login')->with('success', 'Logged out successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => 'Logout failed. Please try again.']);
+            return redirect('/')->withErrors(['error' => 'Logout failed. Please try again.']);
         }
     }
 }
