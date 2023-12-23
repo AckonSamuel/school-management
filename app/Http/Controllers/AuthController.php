@@ -27,7 +27,7 @@ class AuthController extends Controller
             ]);
     
             // Send verification email or perform any other necessary action
-            return redirect()->back()->with('success', 'Verification link sent to email');
+            return redirect()->route('sign_up')->with('success', 'User registered successfully!, Verification link sent to email');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
         } catch (\Exception $e) {

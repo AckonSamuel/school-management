@@ -10,6 +10,20 @@
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-80">
         <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
 
+        @if(session('success'))
+            <p class="mt-4 text-green-500">{{ session('success') }}</p>
+        @endif
+
+        @if ($errors->any())
+            <div class="mt-4">
+                <ul class="list-disc list-inside text-red-500">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form id="signup-form" method="POST" action="{{ route('sign_up') }}">
             @csrf
             <div class="mb-4">
