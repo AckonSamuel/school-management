@@ -49,8 +49,8 @@ class AuthController extends Controller
 
             $token = $user->createToken('apiToken')->plainTextToken;
 
-            // Redirect to the dashboard or any other authenticated page
-            return redirect()->route('home');
+            // Set the token as a cookie for subsequent API requests
+            return redirect()->route('home')->cookie('api_token', $token, 60 * 24);
         } catch (\Exception $e) {
             return view('auth.login')->withErrors(['error' => 'Login failed. Please try again.']);
         }
@@ -59,8 +59,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         try {
-            $request->user()->currentAccessToken()->delete();
-            return redirect('/login')->with('success', 'Logged out successfully');
+            $request->user()->tokens()->delete(); // Revoke all tokens for the user
+            return redirect('/login')->withCookie(cookie()->forget('api_token'))->with('success', 'Logged out successfully');
         } catch (\Exception $e) {
             return redirect('/')->withErrors(['error' => 'Logout failed. Please try again.']);
         }
