@@ -24,7 +24,7 @@
             </div>
         @endif
 
-        <form id="signup-form" method="POST" action="https://dotnut-9337e56f7347.herokuapp.com/sign_up">
+        <form id="signup-form" method="POST" action="{{ route('sign_up') }}">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
