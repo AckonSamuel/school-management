@@ -108,7 +108,7 @@ Route::get('sign_up', function () {
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
+Route::post('/sign_up', [AuthController::class, 'signup'])->name('sign_up');
 
 Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
