@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/verified', function () {
     return view('verified');
 });
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-});
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 // Grouping teacher routes
 Route::prefix('teachers')->group(function () {
     Route::get('create', [TeacherController::class, 'create'])->name('teachers.create');
