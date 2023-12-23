@@ -24,16 +24,16 @@
             </div>
         @endif
 
-        <form id="signup-form" method="POST" action="{{ route('sign_up') }}">
+        <form id="signup-form" method="POST" action="https://dotnut-9337e56f7347.herokuapp.com/sign_up">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
-                <input type="text" id="name" name="name" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="text" id="name" name="name" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
             </div>
 
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                <input type="email" id="email" name="email" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="email" id="email" name="email" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 @error('email')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
                 @enderror
@@ -41,12 +41,12 @@
 
             <div class="mb-4">
                 <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password:</label>
-                <input type="password" id="password" name="password" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="password" id="password" name="password" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
             </div>
 
             <div class="mb-6">
                 <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password:</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="password" id="password_confirmation" name="password_confirmation" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 <p id="password-mismatch" class="text-red-500 text-xs italic hidden">Passwords do not match.</p>
             </div>
 
@@ -55,7 +55,8 @@
             @if ($errors->has('verification'))
                 <p class="mt-4 text-blue-500">{{ $errors->first('verification') }}</p>
             @endif
-        </form><p class="text-sm mt-4 text-gray-600">Already have an account? <a href="{{ route('auth.login') }}" class="text-blue-500">Login</a></p>
+        </form>
+        <p class="text-sm mt-4 text-gray-600">Already have an account? <a href="{{ route('auth.login') }}" class="text-blue-500">Login</a></p>
     </div>
 
     <script>
