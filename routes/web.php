@@ -14,7 +14,11 @@ Route::get('/verified', function () {
     return view('verified');
 });
 
+Route::middleware('auth')->group(function () {
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 // Grouping teacher routes
 Route::prefix('teachers')->group(function () {
     Route::get('create', [TeacherController::class, 'create'])->name('teachers.create');
@@ -71,36 +75,6 @@ Route::prefix('subjects')->group(function () {
     Route::delete('/{subject}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
 });
 
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('auth.login');
-
-Route::get('logout', function () {
-    return view('auth.logout');
-})->name('logout');
-
-Route::get('sign_up', function () {
-    return view('auth.sign_up');
-});
-
-
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-
-Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
-
-Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
-Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
-
-// Excel route
-// Route::get('/teachers/excel', [TeacherController::class, 'importExcel'])->name('teachers.excel');
-Route::post('/assignments', [StudentController::class, 'assignOrUpdateAssignment'])
-        ->name('students.assignOrUpdateAssignment');
-
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Assignment routes
-
 Route::post('/assign/teacher/classroom', [TeacherController::class, 'assignTeacherToClassroom'])->name('assign.teacher.classroom');
 
 Route::post('/assign/teacher/subject', [TeacherController::class , 'assignTeacherToSubject'])->name('assign.teacher.subject');
@@ -114,3 +88,27 @@ Route::get('/assign-teacher-to-classroom', [TeacherController::class, 'assignTea
 Route::get('/assign-teacher-to-subject', [TeacherController::class, 'assignTeacherToSubjectForm'])->name('assign.teacher.subject.form');
 Route::get('/assign-student-to-classroom', [StudentController::class, 'assignStudentToClassroomForm'])->name('assign.student.classroom.form');
 Route::get('/assign-student-to-subject', [StudentController::class, 'assignStudentToSubjectForm'])->name('assign.student.subject.form');
+
+
+Route::get('logout', function () {
+    return view('auth.logout');
+})->name('logout');
+
+});
+
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('auth.login');
+
+Route::get('sign_up', function () {
+    return view('auth.sign_up');
+});
+
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/sign_up', [AuthController::class, 'sign_up'])->name('sign_up');
+
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify');
+Route::post('/email/resend', [EmailVerificationController::class, 'resend'])->name('verification.send');
