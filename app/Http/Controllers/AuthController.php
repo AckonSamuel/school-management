@@ -50,7 +50,7 @@ class AuthController extends Controller
             $token = $user->createToken('apiToken')->plainTextToken;
 
             // Redirect to the dashboard or any other authenticated page
-            return redirect('/')->with('token', $token);
+            return redirect()->route('home');
         } catch (\Exception $e) {
             return view('auth.login')->withErrors(['error' => 'Login failed. Please try again.']);
         }
