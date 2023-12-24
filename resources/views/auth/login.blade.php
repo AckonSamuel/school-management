@@ -34,9 +34,18 @@
             <input type="password" id="password" name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
+        <button type="submit" id="login-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
     </form>
 
     <p class="text-gray-600">Don't have an account yet? <a href="{{ route('sign_up') }}" class="text-blue-500">Sign Up</a></p>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const loginBtn = document.getElementById('login-btn');
+
+        loginForm.addEventListener('submit', function(event) {
+            loginBtn.disabled = true;
+        });
+    </script>
 </body>
 </html>
