@@ -50,7 +50,7 @@
                 <p id="password-mismatch" class="text-red-500 text-xs italic hidden">Passwords do not match.</p>
             </div>
 
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</button>
+            <button type="submit" id="signup-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Sign Up</button>
 
             @if ($errors->has('verification'))
                 <p class="mt-4 text-blue-500">{{ $errors->first('verification') }}</p>
@@ -69,6 +69,9 @@
             if (password.value !== confirmPassword.value) {
                 event.preventDefault(); // Prevent form submission
                 passwordMismatch.classList.remove('hidden'); // Show the password mismatch message
+            } 
+            else {
+                signupBtn.disabled = true;
             }
         });
     </script>
