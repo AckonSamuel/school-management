@@ -21,7 +21,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('auth.login') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form method="POST" id="login-form" action="{{ route('auth.login') }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         @csrf
 
         <div class="mb-4">
