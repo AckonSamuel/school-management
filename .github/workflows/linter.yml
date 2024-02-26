@@ -1,18 +1,28 @@
-name: Lint Code Base
-
-on: [push, pull_request]
-
+name: Run tests
+ 
+on: [push]
+ 
 jobs:
-  build:
-    name: Lint Code Base
+  tests:
+    name: Run tests
     runs-on: ubuntu-latest
-
     steps:
-
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+ 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          fetch-depth: 0
-      
-      - name: Lint Code Base
-        uses: github/super-linter@v4
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+ 
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+ 
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+ 
+      - name: Run tests
+        run: php artisan test
