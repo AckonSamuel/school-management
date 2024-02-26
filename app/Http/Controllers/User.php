@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -13,18 +14,10 @@ class UserController extends Controller
     {
         try {
             $users = User::where('id', '!=', auth()->user()->id)->get();
+
             return response()->json($users);
         } catch (QueryException $exception) {
             return response()->json(['error' => 'Failed to retrieve users.'], 500);
-        }
-    }
-
-    public function show(User $user)
-    {
-        try {
-            return response()->json($user);
-        } catch (\Exception $exception) {
-            return response()->json(['error' => 'User not found.'], 404);
         }
     }
 
@@ -36,11 +29,21 @@ class UserController extends Controller
             ]);
 
             $user = User::create($validatedData);
+
             return response()->json($user, 201);
         } catch (ValidationException $exception) {
             return response()->json(['error' => $exception->errors()], 422);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response()->json(['error' => 'Failed to create user.'], 500);
+        }
+    }
+
+    public function show(User $user)
+    {
+        try {
+            return response()->json($user);
+        } catch (Exception $exception) {
+            return response()->json(['error' => 'User not found.'], 404);
         }
     }
 
@@ -52,10 +55,11 @@ class UserController extends Controller
             ]);
 
             $user->update($validatedData);
+
             return response()->json($user);
         } catch (ValidationException $exception) {
             return response()->json(['error' => $exception->errors()], 422);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response()->json(['error' => 'Failed to update user.'], 500);
         }
     }
@@ -64,8 +68,9 @@ class UserController extends Controller
     {
         try {
             $user->delete();
+
             return response()->json(['message' => 'User deleted successfully']);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response()->json(['error' => 'Failed to delete user.'], 500);
         }
     }

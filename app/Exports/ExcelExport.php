@@ -2,16 +2,18 @@
 
 namespace App\Exports;
 
+use Exception;
+use Illuminate\Support\Facades\Storage;
+use Log;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Illuminate\Support\Facades\Storage;
 
 class ExcelExport
 {
     public function exportDataToExcel($data)
     {
         try {
-            $spreadsheet = new Spreadsheet();
+            $spreadsheet = new Spreadsheet;
             $sheet = $spreadsheet->getActiveSheet();
 
             // Set headers (optional)
@@ -40,11 +42,11 @@ class ExcelExport
             // Return a downloadable response
             return response()->make($fileContent, 200, [
                 'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
+                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
             ]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Log the error for debugging
-            \Log::error('Excel export error: ' . $e->getMessage());
+            Log::error('Excel export error: ' . $e->getMessage());
 
             // Return a response with an error message
             return response()->json(['error' => 'Failed to export Excel file.'], 500);

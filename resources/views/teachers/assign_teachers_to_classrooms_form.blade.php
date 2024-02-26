@@ -28,7 +28,7 @@
             <label for="teacher_id" class="block text-gray-700 text-sm font-bold mb-2">Select Teacher:</label>
             <select name="teacher_id" id="teacher_id" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 <!-- Populate dropdown with teachers -->
-                @foreach($teachers as $teacher)
+                @foreach ($teachers as $teacher)
                     <option value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
                 @endforeach
             </select>
@@ -38,7 +38,7 @@
             <label for="classroom_id" class="block text-gray-700 text-sm font-bold mb-2">Select Classroom:</label>
             <select name="classroom_id" id="classroom_id" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 <!-- Populate dropdown with classrooms -->
-                @foreach($classrooms as $classroom)
+                @foreach ($classrooms as $classroom)
                     <option value="{{ $classroom->id }}">{{ $classroom->class_name }}</option>
                 @endforeach
             </select>

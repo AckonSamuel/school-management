@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class StudentSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class StudentSeeder extends Seeder
                 'address' => $faker->address,
                 'parent_phone_number' => $faker->phoneNumber,
                 'second_phone_number' => $faker->phoneNumber,
-                'gender' => $faker->randomElement(['male','female']),
+                'gender' => $faker->randomElement(['male', 'female']),
                 'classroom_id' => $faker->numberBetween(1, 5), // Assuming there are 5 classrooms
                 'enrollment_date' => $faker->date(),
                 'created_at' => now(),

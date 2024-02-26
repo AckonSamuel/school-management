@@ -10,8 +10,9 @@ class ClassroomController extends Controller
 {
     public function index()
     {
-            $classrooms = Classroom::all();
-            return view('classrooms.index', compact('classrooms'));
+        $classrooms = Classroom::all();
+
+        return view('classrooms.index', compact('classrooms'));
     }
 
     public function create()
@@ -23,6 +24,7 @@ class ClassroomController extends Controller
     {
         try {
             $classroom = Classroom::create($request->validated());
+
             return redirect()->route('classrooms.show', $classroom->id)->with('success', 'Classroom created successfully');
         } catch (QueryException $exception) {
             return back()->withInput()->with('error', 'Failed to store classroom.');
@@ -43,6 +45,7 @@ class ClassroomController extends Controller
     {
         try {
             $classroom->update($request->validated());
+
             return redirect()->route('classrooms.show', $classroom->id)->with('success', 'Classroom updated successfully');
         } catch (QueryException $exception) {
             return back()->withInput()->with('error', 'Failed to update classroom.');
@@ -53,6 +56,7 @@ class ClassroomController extends Controller
     {
         try {
             $classroom->delete();
+
             return redirect()->route('classrooms.index')->with('success', 'Classroom deleted successfully');
         } catch (QueryException $exception) {
             return back()->with('error', 'Failed to delete classroom.');

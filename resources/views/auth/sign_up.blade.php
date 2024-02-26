@@ -10,7 +10,7 @@
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-80">
         <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
 
-        @if(session('success'))
+        @if (session('success'))
             <p class="mt-4 text-green-500">{{ session('success') }}</p>
         @endif
 
@@ -69,7 +69,7 @@
             if (password.value !== confirmPassword.value) {
                 event.preventDefault(); // Prevent form submission
                 passwordMismatch.classList.remove('hidden'); // Show the password mismatch message
-            } 
+            }
             else {
                 signupBtn.disabled = true;
             }

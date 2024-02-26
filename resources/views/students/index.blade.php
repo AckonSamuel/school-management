@@ -6,7 +6,7 @@
 
         <a href="{{ route('students.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4 inline-block">Create New Student</a>
 
-        @if($students->isEmpty())
+        @if ($students->isEmpty())
             <p>No students available</p>
         @else
 
@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        @foreach($students as $student)
+                        @foreach ($students as $student)
                             <tr>
                                 <td class="border px-4 py-2">{{ $student->id }}</td>
                                 <td class="border px-4 py-2">{{ $student->first_name }}</td>

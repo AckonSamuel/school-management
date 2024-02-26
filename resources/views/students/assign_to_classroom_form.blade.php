@@ -3,7 +3,7 @@
 @section('content')
     <div class="py-6">
         <h1 class="text-2xl font-bold mb-4">Assign Student to Classroom</h1>
-        
+
         <div class="mt-2 mb-4 flex justify-between">
             <a href="{{ route('students.index', $student->id) }}" class="flex items-center text-black ml-4 hover:underline">
                 <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

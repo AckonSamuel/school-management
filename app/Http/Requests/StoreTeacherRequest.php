@@ -37,7 +37,7 @@ class StoreTeacherRequest extends FormRequest
     public function messages()
     {
         return [
-            'phone_number.regex' => 'The phone number must be in the format 0244974077'
+            'phone_number.regex' => 'The phone number must be in the format 0244974077',
         ];
     }
 }

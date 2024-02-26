@@ -5,7 +5,7 @@
         <h1 class="text-2xl font-bold mb-4">Teachers List</h1>
 
         <a href="{{ route('teachers.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4 inline-block">Create New teacher</a>
-        @if($teachers->isEmpty())
+        @if ($teachers->isEmpty())
             <p>No teachers available</p>
         @else
 
@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        @foreach($teachers as $teacher)
+                        @foreach ($teachers as $teacher)
                             <tr>
                                 <td class="border px-4 py-2">{{ $teacher->id }}</td>
                                 <td class="border px-4 py-2">{{ $teacher->first_name }}</td>

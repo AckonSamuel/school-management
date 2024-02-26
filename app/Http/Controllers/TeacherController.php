@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
-use App\Http\Requests\StoreAssignmentRequest;
-use App\Http\Requests\UpdateAssignmentRequest;
 use App\Exports\ExcelExport;
-use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAssignmentRequest;
 use App\Http\Requests\StoreTeacherRequest;
+use App\Http\Requests\UpdateAssignmentRequest;
 use App\Http\Requests\UpdateTeacherRequest;
-use App\Models\Teacher;
-use App\Models\Subject;
-use App\Models\Classroom;
 use App\Models\Assignment;
+use App\Models\Classroom;
+use App\Models\Subject;
+use App\Models\Teacher;
+use Exception;
 use Illuminate\Http\Request;
+use Log;
+use PDF;
 
 class TeacherController extends Controller
 {
@@ -22,8 +23,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-            $teachers = Teacher::all();
-            return view('teachers.index', compact('teachers'));
+        $teachers = Teacher::all();
+
+        return view('teachers.index', compact('teachers'));
     }
 
     public function create()
@@ -36,9 +38,11 @@ class TeacherController extends Controller
         try {
             $validated = $request->validated();
             $teacher = Teacher::create($validated);
+
             return redirect()->route('teachers.show', $teacher->id)->with('success', 'Teacher created successfully');
-        } catch (\Exception $e) {
-            \Log::error('Teacher creation error: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('Teacher creation error: ' . $e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to create teacher. Please try again.');
         }
     }
@@ -48,14 +52,21 @@ class TeacherController extends Controller
         return view('teachers.show', compact('teacher'));
     }
 
+    public function edit(Teacher $teacher)
+    {
+        return view('teachers.edit', compact('teacher'));
+    }
+
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
         try {
             $validated = $request->validated();
             $teacher->update($validated);
+
             return redirect()->route('teachers.show', $teacher->id)->with('success', 'Teacher updated successfully');
-        } catch (\Exception $e) {
-            \Log::error('Teacher update error: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('Teacher update error: ' . $e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to update teacher. Please try again.');
         }
     }
@@ -64,12 +75,15 @@ class TeacherController extends Controller
     {
         try {
             $teacher->delete();
+
             return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfully');
-        } catch (\Exception $e) {
-            \Log::error('Teacher deletion error: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('Teacher deletion error: ' . $e->getMessage());
+
             return back()->with('error', 'Failed to delete teacher. Please try again.');
         }
     }
+
     public function createPDF()
     {
         try {
@@ -86,21 +100,19 @@ class TeacherController extends Controller
                 ]);
 
             return $pdf->download('teachers_pdf_file.pdf');
-        } catch (\Exception $e) {
-            \Log::error('PDF generation error: ' . $e->getMessage());
+        } catch (Exception $e) {
+            Log::error('PDF generation error: ' . $e->getMessage());
+
             return back()->with('error', 'PDF generation failed. Please try again later.');
         }
     }
+
     public function exportToExcel()
     {
         $teachers = Teacher::all()->toArray();
-        $export = new ExcelExport();
-        return $export->exportDataToExcel($teachers);
-    }
+        $export = new ExcelExport;
 
-    public function edit(Teacher $teacher)
-    {
-        return view('teachers.edit', compact('teacher'));
+        return $export->exportDataToExcel($teachers);
     }
 
     public function assignSubject(StoreAssignmentRequest $request, Teacher $teacher)
@@ -150,15 +162,19 @@ class TeacherController extends Controller
         return redirect()->back()->with('success', 'Teacher assigned to classroom successfully.');
     }
 
-    public function assignTeacherToClassroomForm() {
+    public function assignTeacherToClassroomForm()
+    {
         $teachers = Teacher::all();
         $classrooms = Classroom::all();
-        return view('teachers.assign_teachers_to_classrooms_form', compact('teachers', 'classrooms'));   
+
+        return view('teachers.assign_teachers_to_classrooms_form', compact('teachers', 'classrooms'));
     }
 
-    public function assignTeacherToSubjectForm() {
+    public function assignTeacherToSubjectForm()
+    {
         $teachers = Teacher::all();
         $subjects = Subject::all();
-        return view('teachers.assign_teachers_to_subjects_form', compact('teachers', 'subjects'));   
+
+        return view('teachers.assign_teachers_to_subjects_form', compact('teachers', 'subjects'));
     }
 }

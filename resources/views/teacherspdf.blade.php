@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-    @foreach($teachers ?? [] as $data)
+    @foreach ($teachers ?? [] as $data)
     <tr>
         <td>{{ $data['first_name'] }}</td>
         <td>{{ $data['last_name'] }}</td>

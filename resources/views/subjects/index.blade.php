@@ -6,7 +6,7 @@
 
         <a href="{{ route('subjects.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mb-4 inline-block">Create New Subject</a>
 
-        @if($subjects->isEmpty())
+        @if ($subjects->isEmpty())
             <p>No Subject available</p>
         @else
             <div class="overflow-x-auto">
@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
-                        @foreach($subjects as $subject)
+                        @foreach ($subjects as $subject)
                             <tr>
                                 <td class="border px-4 py-2">{{ $subject->id }}</td>
                                 <td class="border px-4 py-2">{{ $subject->name }}</td>

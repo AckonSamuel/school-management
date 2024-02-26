@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    @if(session('success'))
+    @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
             {{ session('success') }}
         </div>
@@ -28,7 +28,7 @@
             <label for="student_id" class="block text-gray-700 text-sm font-bold mb-2">Select Student:</label>
             <select name="student_id" id="student_id" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 <!-- Populate dropdown with students -->
-                @foreach($students as $student)
+                @foreach ($students as $student)
                     <option value="{{ $student->id }}">{{ $student->first_name }} {{ $student->last_name }}</option>
                 @endforeach
             </select>
@@ -38,7 +38,7 @@
             <label for="subject_id" class="block text-gray-700 text-sm font-bold mb-2">Select Subject:</label>
             <select name="subject_id" id="subject_id" class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 <!-- Populate dropdown with subjects -->
-                @foreach($subjects as $subject)
+                @foreach ($subjects as $subject)
                     <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                 @endforeach
             </select>

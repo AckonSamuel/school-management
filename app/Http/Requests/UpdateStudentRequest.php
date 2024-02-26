@@ -35,7 +35,7 @@ class UpdateStudentRequest extends FormRequest
     public function messages()
     {
         return [
-            'parent_phone_number.regex' => 'The phone number must be in the format 0244974077'
+            'parent_phone_number.regex' => 'The phone number must be in the format 0244974077',
         ];
     }
 }

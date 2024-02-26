@@ -21,7 +21,7 @@
                 </ul>
             </div>
         @endif
-        
+
         <form action="{{ route('teachers.update', $teacher->id) }}" method="POST" enctype="multipart/form-data" class="max-w-md mx-auto">
             @csrf
             @method('PUT')
@@ -87,7 +87,7 @@
                 @endforeach
             </select>
         </div>
-            
+
             <div class="mb-4 flex justify-between">
                 <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Update</button>
             </div>

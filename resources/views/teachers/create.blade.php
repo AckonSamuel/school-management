@@ -14,7 +14,7 @@
                 </ul>
             </div>
         @endif
-        
+
         <form action="{{ route('teachers.store') }}" method="POST">
             @csrf
 
@@ -93,8 +93,8 @@
                     </td>
                     <td class="py-2">
                     <select id="gender" name="gender" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        <option value="male" @if(old('gender') == 'male') selected @endif>Male</option>
-        <option value="female" @if(old('gender') == 'female') selected @endif>Female</option>
+        <option value="male" @if (old('gender') == 'male') selected @endif>Male</option>
+        <option value="female" @if (old('gender') == 'female') selected @endif>Female</option>
     </select></td>
                 </tr>
             </table>

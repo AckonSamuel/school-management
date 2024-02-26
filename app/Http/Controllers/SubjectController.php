@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
+use Exception;
+use Log;
 
 class SubjectController extends Controller
 {
@@ -13,9 +16,10 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = Subject::all();
+
         return view('subjects.index', compact('subjects'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */
@@ -24,12 +28,14 @@ class SubjectController extends Controller
         try {
             $validated = $request->validated();
             $subject = Subject::create($validated);
-            return view('subjects.show', compact('subject'))->with('success', 'Subject created successfully');
-        } catch (\Exception $e) {
-            \Log::error('Subject creation error: ' . $e->getMessage());
+
+            return view('subjects.show', ['success' => 'Subject created successfully']);
+        } catch (Exception $e) {
+            Log::error('Subject creation error: ' . $e->getMessage());
+
             return back()->withInput()->with('error', 'Failed to Subject teacher. Please try again.');
         }
-    }    
+    }
 
     /**
      * Display the specified resource.
@@ -38,11 +44,17 @@ class SubjectController extends Controller
     {
         try {
             return view('subjects.show', compact('subject'));
-        } catch (\Exception $exception) {
-            return view('error')->with('error', $exception->getMessage());
+        } catch (Exception $exception) {
+            return view('error', ['error' => $exception->getMessage()]);
         }
     }
-    
+
+    public function edit($id)
+    {
+        $subject = Subject::findOrFail($id);
+
+        return view('subjects.edit', compact('subject'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -52,19 +64,12 @@ class SubjectController extends Controller
         try {
             $validated = $request->validated();
             $subject->update($validated);
-            return view('subjects.show', compact('subject'))->with('success', 'Subject updated successfully');
-        } catch (\Exception $exception) {
-            return view('error')->with('error', $exception->getMessage());
+
+            return view('subjects.show', ['success' => 'Subject updated successfully']);
+        } catch (Exception $exception) {
+            return view('error', ['error' => $exception->getMessage()]);
         }
     }
-
-    public function edit($id)
-    {
-        $subject = Subject::findOrFail($id);
-    
-        return view('subjects.edit', compact('subject'));
-    }
-    
 
     /**
      * Remove the specified resource from storage.
@@ -73,9 +78,10 @@ class SubjectController extends Controller
     {
         try {
             $subject->delete();
+
             return redirect()->route('subjects.index')->with('success', 'Subject deleted successfully');
-        } catch (\Exception $exception) {
-            return view('error')->with('error', $exception->getMessage());
+        } catch (Exception $exception) {
+            return view('error', ['error' => $exception->getMessage()]);
         }
     }
 }
