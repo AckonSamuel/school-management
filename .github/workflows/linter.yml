@@ -23,4 +23,4 @@ jobs:
         run: composer global require "squizlabs/php_codesniffer=*"
 
       - name: Run PHPCS
-        run:  phpcs --standard=PSR2 . --ignore=vendor/*
+        run:  phpcs --standard=PSR2 --auto-fix . --ignore=vendor/*
