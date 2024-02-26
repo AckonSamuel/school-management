@@ -21,9 +21,9 @@ jobs:
 
       - name: Install PHPCS
         run: composer global require "squizlabs/php_codesniffer=*"
+    
+      - name: Run autofixer
+        run:  phpcbf --standard=PSR2 . --ignore=vendor/*
 
       - name: Run PHPCS
         run:  phpcs --standard=PSR2 . --ignore=vendor/*
-
-      - name: Run autofixer
-        run: phpcbf --standard=PSR2 . --ignore=vendor/*
