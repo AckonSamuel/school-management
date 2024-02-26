@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateTeacherRequest;
 use App\Models\Assignment;
 use App\Models\Teacher;
 use Exception;
-use Log;
+use Illuminate\Support\Facades\Log;
 use PDF;
 
 class TeacherController extends Controller

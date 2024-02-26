@@ -11,7 +11,7 @@ use App\Models\Student;
 use App\Models\Subject;
 use Exception;
 use Illuminate\Http\Request;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {

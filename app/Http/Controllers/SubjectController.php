@@ -6,7 +6,7 @@ use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
 use Exception;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class SubjectController extends Controller
 {

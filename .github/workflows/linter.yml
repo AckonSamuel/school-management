@@ -19,11 +19,5 @@ jobs:
       - name: Run composer install
         run: composer install -n --prefer-dist
 
-      - name: Install PHPCS
-        run: composer global require "squizlabs/php_codesniffer=*"
-    
-      - name: Run autofixer
-        run:  phpcbf --standard=PSR2 . --ignore=vendor/*
-
-      - name: Run PHPCS
-        run:  phpcs --standard=PSR2 . --ignore=vendor/*
+      - name: Run linter
+        run:  ./vendor/bin/duster lint

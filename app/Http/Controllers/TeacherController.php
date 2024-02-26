@@ -13,7 +13,7 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use Exception;
 use Illuminate\Http\Request;
-use Log;
+use Illuminate\Support\Facades\Log;
 use PDF;
 
 class TeacherController extends Controller
